@@ -1,3 +1,17 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
+	import StatsCounter from '$lib/components/homepage/StatsCounter.svelte';
+	import AboutSection from '$lib/components/homepage/AboutSection.svelte';
+	import WorldMap from '$lib/components/homepage/WorldMap.svelte';
+</script>
+
+<HeroSection />
+
+<section class="grid grid-cols-1 gap-6 bg-white py-12 text-center sm:grid-cols-3">
+	<StatsCounter label="Trees Planted" count={102312} />
+	<StatsCounter label="Volunteers" count={7812} />
+	<StatsCounter label="Countries Reached" count={32} />
+</section>
+
+<AboutSection />
+<WorldMap />
