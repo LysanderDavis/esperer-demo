@@ -1,4 +1,5 @@
 <script>
+	import Typography from '$lib/components/Typography.svelte';
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import StatsCounter from '$lib/components/homepage/StatsCounter.svelte';
 	import AboutSection from '$lib/components/homepage/AboutSection.svelte';

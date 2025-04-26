@@ -7,11 +7,8 @@
 	import Footer from '$lib/components/layout/Footer.svelte';
 </script>
 
-<Header />
-{@render children()}
-
-<!-- <div class="min-h-screen">
-	<slot />
-</div> -->
-
-<Footer />
+<main class="bg-[your-color] min-h-screen">
+  <Header />
+    {@render children()}
+  <Footer />
+</main>
