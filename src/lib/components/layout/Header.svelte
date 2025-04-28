@@ -17,7 +17,7 @@
 	}
 </script>
 
-<header lang="fr" class="fixed top-0 right-0 left-0 z-50 bg-white shadow-md">
+<header class="fixed top-0 right-0 left-0 z-50 border-b border-black bg-white shadow-md">
 	<!-- Top Bar -->
 	<div class="w-full bg-[#9d5d2c]">
 		<div class="flex items-center justify-between px-6 py-4 sm:px-12 lg:px-24">
@@ -36,7 +36,7 @@
 				<a href="/contact" class="transition-colors hover:text-[#a09175]">Contact</a>
 				<a
 					href="/join"
-					class="rounded-lg border border-[#a09175] bg-white px-4 py-2 text-sm text-black transition-colors hover:bg-[#a09175] hover:text-white"
+					class="rounded-lg border border-[#a09175] bg-white px-4 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c]"
 				>
 					Get Involved
 				</a>

@@ -3,19 +3,20 @@
 		{ name: 'Linktree', href: '/', icon: '/Linktree.svg' },
 		{ name: 'YouTube', href: '/', icon: '/Youtube.svg' },
 		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
-		{ name: 'Substack', href: '/', icon: '/Substack_1.svg' },
+		{ name: 'Substack', href: '/', icon: '/Substack.svg' },
 		{ name: 'Telegram', href: '/', icon: '/Telegram.svg' },
+		{ name: 'Buy Us a Coffee', href: '/', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: '/', icon: '/Instagram.svg' },
 		{ name: 'Bluesky', href: '/', icon: '/Bluesky.svg' }
 	];
 
 	const aboutUs = [
 		{ name: 'Our Mission', href: '/our-mission' },
-		{ name: 'Six Pillars of Espérer', href: '/src/routes/six-pillars/+page.svelte' }
+		{ name: 'Six Pillars of Espérer', href: '/six-pillars' }
 	];
 	const ourWork = [
 		{ name: 'Global Impact', href: '/global-impact' },
-		{ name: 'Our Journal', href: '/our-journal' }
+		{ name: 'Our E-magazine', href: '/our-journal' }
 	];
 
 	let email = '';
@@ -119,7 +120,7 @@
 		</div>
 
 		<!-- Social media icons -->
-		<div class="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
+		<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
 			{#each socialLinks as { href, icon, name }}
 				<a {href} target="_blank" rel="noopener noreferrer" aria-label={name}>
 					<img
