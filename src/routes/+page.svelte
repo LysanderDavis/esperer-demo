@@ -2,8 +2,7 @@
 	import Typography from '$lib/components/Typography.svelte';
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import StatsCounter from '$lib/components/homepage/StatsCounter.svelte';
-	import Gallery from '$lib/components/homepage/Gallery.svelte';
-	import WorldMap from '$lib/components/homepage/WorldMap.svelte';
+	import Gallery from '$lib/components/homepage/Gallery.svelte';;
 
 	// Here, define your stats once to make it easy to update
 	const stats = {
@@ -39,4 +38,3 @@
 </section>
 
 <Gallery />
-<WorldMap />

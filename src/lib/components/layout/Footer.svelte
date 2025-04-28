@@ -1,69 +1,138 @@
 <script lang="ts">
 	const socialLinks = [
-		{ name: 'Linktree', href: '/', icon: '/linktree.svg' },
-		{ name: 'Donate', href: '/', icon: '/heart.svg' },
-		{ name: 'Telegram', href: '/', icon: '/telegram-light-sharp.svg' },
-		{ name: 'Discord', href: '/', icon: '/discord-light-sharp.svg' },
-		{ name: 'Facebook', href: '/', icon: '/facebook-light-sharp.svg' }
+		{ name: 'Linktree', href: '/', icon: '/Linktree.svg' },
+		{ name: 'YouTube', href: '/', icon: '/Youtube.svg' },
+		{ name: 'Substack', href: '/', icon: '/Substack_1.svg' },
+		{ name: 'Telegram', href: '/', icon: '/Telegram.svg' },
+		{ name: 'Instagram', href: '/', icon: '/Instagram.svg' },
+		{ name: 'Bluesky', href: '/', icon: '/Bluesky.svg' }
 	];
 
-	const aboutUs = ['Our Mission', 'Six Pillars of Espérer'];
-	const ourWork = ['Global Impact', 'Our Journal'];
+	const aboutUs = [
+		{ name: 'Our Mission', href: '/our-mission' },
+		{ name: 'Six Pillars of Espérer', href: '/src/routes/six-pillars/+page.svelte' }
+	];
+	const ourWork = [
+		{ name: 'Global Impact', href: '/global-impact' },
+		{ name: 'Our Journal', href: '/our-journal' }
+	];
+
+	let email = '';
+	let emailError = '';
+	let successMessage = '';
+
+	function validateEmail(email: string) {
+		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return re.test(email.toLowerCase());
+	}
+
+	function handleSubmit() {
+		emailError = '';
+		successMessage = '';
+
+		if (!validateEmail(email)) {
+			emailError = 'Please enter a valid email address.';
+			return;
+		}
+
+		// Simulate API call
+		setTimeout(() => {
+			successMessage = 'Thank you for subscribing!';
+			email = '';
+		}, 1000);
+	}
 </script>
 
 <footer class="bg-[#b06b35] py-12 text-white">
-	<div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 md:grid-cols-4">
-		<!-- Logo and Social -->
-		<div class="space-y-6">
-			<a href="/" class="flex items-center">
-				<img
-					src={'/esprer-logo-transparent.svg'}
-					alt="Espérer"
-					class="h-12 h-[72px] mb-5"
-				/>
-			</a>
-			<div class="flex flex-wrap gap-4">
-				{#each socialLinks as { href, icon, name }}
-					<a {href} target="_blank" rel="noopener noreferrer" aria-label={name}>
-						<img
-							src={icon}
-							alt={name}
-							class="h-10 w-10 transition-transform hover:scale-110 hover:rotate-6"
-						/>
+	<div class="mx-auto flex max-w-7xl flex-col gap-12 px-6 pt-15">
+		<!-- Top: Links and Logo -->
+		<div class="grid grid-cols-1 gap-y-8 md:grid-cols-4">
+			<!-- Logo -->
+			<div class="md:pr-4">
+				<a href="/" class="flex items-center">
+					<img src={'/esprer-logo-transparent.svg'} alt="Espérer" class="mb-5 h-[72px]" />
+				</a>
+			</div>
+
+			<!-- About Us -->
+			<div class="md:px-4">
+				<h3 class="mb-4 text-xl font-semibold">About Us</h3>
+				<ul class="space-y-2">
+					{#each aboutUs as { name, href }}
+						<li>
+							<a {href} class="hover:underline">{name}</a>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<!-- Our Work -->
+			<div class="md:px-4">
+				<h3 class="mb-4 text-xl font-semibold">Our Work</h3>
+				<ul class="space-y-2">
+					{#each ourWork as { name, href }}
+						<li>
+							<a {href} class="hover:underline">{name}</a>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<!-- Contact -->
+			<div class="space-y-4 md:px-4">
+				<h3 class="mb-4 text-xl font-semibold">Contact Us</h3>
+				<p>Email:</p>
+				<p>
+					<a href="mailto:hello@esperer.org" class="font-bold underline hover:text-gray-300">
+						hello@esperer.org
 					</a>
-				{/each}
+				</p>
 			</div>
 		</div>
 
-		<!-- Products -->
-		<div>
-			<h3 class="mb-4 text-xl font-semibold">About Us</h3>
-			<ul class="space-y-2">
-				{#each aboutUs as about}
-					<li class="cursor-pointer hover:underline">{about}</li>
-				{/each}
-			</ul>
+		<!-- Newsletter (smaller max width) -->
+		<div class="flex w-full">
+			<div class="w-full max-w-sm">
+				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter!</h3>
+				<div class="flex flex-col space-y-3">
+					<input
+						type="email"
+						placeholder="Your email address"
+						bind:value={email}
+						class="rounded-lg p-3 text-black focus:ring-2 focus:ring-white focus:outline-none"
+					/>
+					<button
+						on:click={handleSubmit}
+						class="hover:bg-opacity-80 rounded-lg bg-white p-3 font-semibold text-[#b06b35] transition"
+					>
+						Subscribe
+					</button>
+					{#if emailError}
+						<p class="text-sm text-red-200">{emailError}</p>
+					{/if}
+					{#if successMessage}
+						<p class="text-sm text-green-200">{successMessage}</p>
+					{/if}
+				</div>
+			</div>
 		</div>
 
-		<!-- About -->
-		<div>
-			<h3 class="mb-4 text-xl font-semibold">Our Work</h3>
-			<ul class="space-y-2">
-				{#each ourWork as work}
-					<li class="cursor-pointer hover:underline">{work}</li>
-				{/each}
-			</ul>
+		<!-- Social media icons -->
+		<div class="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
+			{#each socialLinks as { href, icon, name }}
+				<a {href} target="_blank" rel="noopener noreferrer" aria-label={name}>
+					<img
+						src={icon}
+						alt={name}
+						class="h-10 w-10 transition-transform hover:scale-110 hover:rotate-6"
+					/>
+				</a>
+			{/each}
 		</div>
 
-		<!-- Contact -->
-		<div class="space-y-4">
-			<h3 class="mb-4 text-xl font-semibold">Contact Us</h3>
-			<p>Email:</p>
-			<p class="font-bold break-words">we don't have an email yet :)</p>
+		<!-- Copyright -->
+		<div class="mt-8 text-center text-sm opacity-70">
+			© {new Date().getFullYear()} <span lang="fr">Espérer.</span> All rights reserved.
 		</div>
-	</div>
-
-	<div class="mt-12 text-center text-sm opacity-70">
-		© {new Date().getFullYear()} <span lang="fr">Espérer.</span> All rights reserved.
 	</div>
 </footer>
