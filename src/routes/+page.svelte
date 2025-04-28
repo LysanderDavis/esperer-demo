@@ -2,7 +2,7 @@
 	import Typography from '$lib/components/Typography.svelte';
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import StatsCounter from '$lib/components/homepage/StatsCounter.svelte';
-	import AboutSection from '$lib/components/homepage/AboutSection.svelte';
+	import Gallery from '$lib/components/homepage/Gallery.svelte';
 	import WorldMap from '$lib/components/homepage/WorldMap.svelte';
 </script>
 
@@ -14,5 +14,5 @@
 	<StatsCounter label="Countries Reached" count={1} />
 </section>
 
-<AboutSection />
+<Gallery />
 <WorldMap />
