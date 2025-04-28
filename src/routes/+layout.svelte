@@ -8,7 +8,7 @@
 </script>
 
 <main class="min-h-screen bg-[your-color]">
-		<Header />
+	<Header />
 
 	<div class="w-full border-t border-black"></div>
 	{@render children()}

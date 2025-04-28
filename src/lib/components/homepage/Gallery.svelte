@@ -12,7 +12,7 @@
 </script>
 
 <section class="flex flex-col items-center bg-[#9d5d2c] p-24">
-	<Typography variant="h2" className="pb-24 text-5xl text-white">Photo Gallery</Typography>
+	<Typography variant="h2" className="pb-24 text-5xl text-white">Our Photo Gallery</Typography>
 
 	<div class="mb-14 flex flex-wrap justify-center gap-8 rounded-3xl bg-[#9d5d2c]">
 		{#each photos as photo, i}

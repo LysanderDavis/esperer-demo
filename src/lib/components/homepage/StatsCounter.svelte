@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Typography from '$lib/components/Typography.svelte';
 
-	export let label = 'Trees Planted';
+	export let label = 'People Reached';
 	export let count = 100000;
 
 	let current = 0;
@@ -52,7 +52,7 @@
 	});
 </script>
 
-<div bind:this={element} class="p-24 text-center">
+<div bind:this={element} class="p-14 text-center">
 	<Typography variant="h1" className="text-[#9d5d2c] text-6xl">
 		{current.toLocaleString()}
 	</Typography>

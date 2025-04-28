@@ -21,7 +21,11 @@
 
 <section class="relative h-screen w-full overflow-hidden">
 	<!-- Background Image -->
-	<img src={imageSrc} alt="A man on the horse next to stunning mountains" class="absolute inset-0 h-full w-full object-cover" />
+	<img
+		src={imageSrc}
+		alt="A man on the horse next to stunning mountains"
+		class="absolute inset-0 h-full w-full object-cover"
+	/>
 
 	<!-- Overlay -->
 	<div class="absolute inset-0 bg-black/30"></div>
@@ -30,7 +34,7 @@
 	<div class="relative z-10 flex h-full items-center justify-end px-8 md:px-16">
 		<div class="max-w-xl space-y-6 text-right text-white">
 			<Typography variant="h1" className="text-4xl md:text-6xl">
-				Real change begins<br />with Espérer
+				Real change begins<br />with <span lang="fr">Espérer</span>
 			</Typography>
 
 			<Typography variant="body" className="text-lg md:text-xl">
