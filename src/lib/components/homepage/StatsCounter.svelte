@@ -52,7 +52,7 @@
 	});
 </script>
 
-<div bind:this={element} class="text-center p-24">
+<div bind:this={element} class="p-24 text-center">
 	<Typography variant="h1" className="text-[#9d5d2c] text-6xl">
 		{current.toLocaleString()}
 	</Typography>
