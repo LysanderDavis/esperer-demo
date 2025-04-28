@@ -2,6 +2,7 @@
 	const socialLinks = [
 		{ name: 'Linktree', href: '/', icon: '/Linktree.svg' },
 		{ name: 'YouTube', href: '/', icon: '/Youtube.svg' },
+		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
 		{ name: 'Substack', href: '/', icon: '/Substack_1.svg' },
 		{ name: 'Telegram', href: '/', icon: '/Telegram.svg' },
 		{ name: 'Instagram', href: '/', icon: '/Instagram.svg' },
