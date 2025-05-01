@@ -86,7 +86,7 @@
 				<p>Email:</p>
 				<p>
 					<a href="mailto:hello@esperer.org" class="font-bold underline hover:text-gray-300">
-						hello@esperer.org
+						we don't have an email yet :)
 					</a>
 				</p>
 			</div>
