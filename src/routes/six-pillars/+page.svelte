@@ -5,7 +5,7 @@
 	const pillars = [
 		{
 			title: 'Hope',
-			content: `Espérer was founded with one vital goal in mind: to instill hope in humanity to eradicate climate change and its side effects. However close the Earth's temperature approaches 2.0ºC, we remain hopeful. If we don’t bring necessary change today, we will tomorrow.`
+			content: `Espérer was founded with one vital goal in mind: to instill hope in humanity to eradicate climate change and its side effects. However close the Earth's temperature approaches 2.0ºC, we remain hopeful. If we don't bring necessary change today, we will tomorrow.`
 		},
 		{
 			title: 'Perseverance',
@@ -38,18 +38,6 @@
 	<div
 		class="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-[#f5e4d7] opacity-50 blur-2xl"
 	></div>
-
-	<!-- Decorative Squiggles -->
-	<img
-		src="/squiggle1.svg"
-		alt=""
-		class="animate-floating absolute top-20 left-10 w-24 opacity-20"
-	/>
-	<img
-		src="/squiggle2.svg"
-		alt=""
-		class="animate-floating-reverse absolute right-10 bottom-20 w-24 opacity-20"
-	/>
 
 	<!-- Title -->
 	<Typography variant="h1" className="text-center text-[#9d5d2c] mb-16 relative z-10 text-5xl">
@@ -98,36 +86,6 @@
 		</div>
 	</div>
 </section>
-	<!-- Smooth Fade Transition into Footer -->
-	<div class="h-24 w-full bg-gradient-to-b from-transparent to-[#b06b35]"></div>
 
-
-<style>
-	@keyframes floating {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-10px);
-		}
-	}
-
-	@keyframes floating-reverse {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(10px);
-		}
-	}
-
-	.animate-floating {
-		animation: floating 6s ease-in-out infinite;
-	}
-
-	.animate-floating-reverse {
-		animation: floating-reverse 6s ease-in-out infinite;
-	}
-</style>
+<!-- Smooth Fade Transition into Footer -->
+<div class="h-14 w-full bg-gradient-to-b from-transparent to-[#b06b35]"></div>

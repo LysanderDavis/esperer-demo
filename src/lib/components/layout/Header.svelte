@@ -32,8 +32,8 @@
 
 			<!-- Desktop Links -->
 			<div class="hidden items-center space-x-8 text-white lg:flex">
-				<a href="/about" class="transition-colors hover:text-[#a09175]">About Us</a>
-				<a href="/contact" class="transition-colors hover:text-[#a09175]">Contact</a>
+				<a href="/about" class="transition-colors hover:underline">About Us</a>
+				<a href="/contact" class="transition-colors hover:underline">Contact</a>
 				<a
 					href="/join"
 					class="rounded-lg border border-[#a09175] bg-white px-4 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c]"
