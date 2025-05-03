@@ -6,7 +6,7 @@
 
 	// Here, define your stats once to make it easy to update
 	const stats = {
-		peopleReached: 0,
+		peopleReached: 20,
 		volunteers: 5,
 		countriesReached: 1
 	};
