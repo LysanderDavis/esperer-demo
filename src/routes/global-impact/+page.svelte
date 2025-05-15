@@ -10,18 +10,26 @@
 	type LatLngTuple = [number, number];
 
 	const members: { name: string; location: LatLngTuple; description: string }[] = [
-		{ name: 'Kaarle Hurtig', location: [60.1699, 24.9384], description: 'Entrepreneur' },
 		{
-			name: 'Alex Cruise',
-			location: [49.2827, -123.1207],
-			description: 'Big data nerd, nonprofit board member'
+			name: 'Igor Tokach',
+			location: [38.7, 65.7847], // Qarshi
+			description: 'Volunteer (Qarshi, Uzbekistan)'
 		},
 		{
-			name: 'Julia van Boven',
-			location: [52.3676, 4.9041],
-			description: 'Co-founder and Community Director'
+			name: 'Javelin Gaziyev',
+			location: [38.8611, 65.7847], // Qarshi
+			description: 'Volunteer (Qarshi, Uzbekistan)'
 		},
-		{ name: 'Emily Reschke', location: [51.9225, 4.4792], description: 'Rotterdam' }
+		{
+			name: 'Muhammadlaziz Ibaydullayev',
+			location: [40.7821, 72.3442], // Andijan
+			description: 'Founder (Andijan, Uzbekistan)'
+		},
+		{
+			name: 'Anna Novikova',
+			location: [41.2995, 69.2401], // Tashkent
+			description: 'Volunteer (Tashkent, Uzbekistan)'
+		}
 	];
 
 	const markerIcon = L.divIcon({
