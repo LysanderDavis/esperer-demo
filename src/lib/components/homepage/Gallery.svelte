@@ -1,14 +1,26 @@
 <script lang="ts">
 	import Typography from '$lib/components/Typography.svelte';
+	import { onMount } from 'svelte';
 
-	const photos: string[] = [
-		'/IMG_1.JPG',
-		'/IMG_2.JPG',
-		'/IMG_3.JPG',
-		'/IMG_4.JPG',
-		'/IMG_5.JPG',
-		'/IMG_6.JPG'
-	];
+	const baseNames = ['IMG_1', 'IMG_2', 'IMG_3', 'IMG_4', 'IMG_5', 'IMG_6'];
+
+	// Initially use compressed images
+	let photos = baseNames.map((name) => ({
+		low: `/${name}-comp.jpg`,
+		high: `/${name}.JPG`,
+		current: `/${name}-comp.jpg`
+	}));
+
+	// On mount, try loading the high-quality images
+	onMount(() => {
+		photos.forEach((photo, index) => {
+			const img = new Image();
+			img.src = photo.high;
+			img.onload = () => {
+				photos[index].current = photo.high;
+			};
+		});
+	});
 </script>
 
 <section class="flex flex-col items-center bg-[#9d5d2c] p-24">
@@ -21,8 +33,8 @@
 				style="transform: rotate({i % 2 === 0 ? '-3deg' : '3deg'});"
 			>
 				<img
-					src={photo}
-					alt="Gallery images"
+					src={photo.current}
+					alt="Gallery image"
 					class="h-full w-full object-cover transition duration-300 ease-in-out hover:scale-110"
 				/>
 			</div>
