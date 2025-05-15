@@ -2,7 +2,7 @@
 	import Typography from '$lib/components/Typography.svelte';
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import StatsCounter from '$lib/components/homepage/StatsCounter.svelte';
-	import Gallery from '$lib/components/homepage/Gallery.svelte';;
+	import Gallery from '$lib/components/homepage/Gallery.svelte';
 
 	// Here, define your stats once to make it easy to update
 	const stats = {
@@ -16,9 +16,7 @@
 
 <section class="py-20">
 	<div class="text-center">
-		<Typography variant="h2" className=" text-5xl font-bold text-[#9d5d2c]"
-			>Our Impact</Typography
-		>
+		<Typography variant="h2" className=" text-5xl font-bold text-[#9d5d2c]">Our Impact</Typography>
 
 		<div class="mt-10 grid grid-cols-1 gap-8 px-6 sm:grid-cols-3">
 			<StatsCounter label="People Reached" count={stats.peopleReached} />

@@ -52,12 +52,17 @@
 </script>
 
 <!-- Main Layout -->
-<div class="flex min-h-screen flex-col bg-[#f5e9dc] pt-20 pb-4">
+<div class="flex min-h-screen flex-col bg-[#f5e9dc] pt-40 pb-4">
 	<!-- Content (title + map) -->
 	<div class="container mx-auto px-4">
 		<!-- Title -->
 		<div class="mb-4">
-			<Typography variant="h1" className="text-[#9d5d2c]">Members Map</Typography>
+			<Typography
+				variant="h1"
+				className="text-[#9d5d2c] text-center text-5xl md:text-4xl font-bold"
+			>
+				Members Map
+			</Typography>
 		</div>
 
 		<!-- Map -->
