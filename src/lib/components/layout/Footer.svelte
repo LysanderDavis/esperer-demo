@@ -11,7 +11,7 @@
 	];
 
 	const aboutUs = [
-		{ name: 'Our Mission', href: '/our-mission' },
+/* 		{ name: 'Our Mission', href: '/our-mission' }, */
 		{ name: 'Six Pillars of Espérer', href: '/six-pillars' }
 	];
 	const ourWork = [

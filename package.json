@@ -40,6 +40,7 @@
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
+		"@types/leaflet": "^1.9.17",
 		"autoprefixer": "^10.4.21",
 		"postcss": "^8.5.3",
 		"prettier": "^3.4.2",
@@ -54,5 +55,8 @@
 	},
 	"keywords": [
 		"svelte"
-	]
+	],
+	"dependencies": {
+		"leaflet": "^1.9.4"
+	}
 }
