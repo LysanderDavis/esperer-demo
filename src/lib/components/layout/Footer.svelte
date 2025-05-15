@@ -95,7 +95,7 @@
 		<!-- Newsletter (smaller max width) -->
 		<div class="flex w-full">
 			<div class="w-full max-w-sm">
-				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter!</h3>
+				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter! (Not Yet Functional)</h3>
 				<div class="flex flex-col space-y-3">
 					<input
 						type="email"
