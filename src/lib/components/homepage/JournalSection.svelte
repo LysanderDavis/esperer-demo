@@ -27,7 +27,8 @@
 			<Typography variant="body" className="text-base sm:text-lg leading-relaxed">
 				Explore the science behind water scarcity, the ethics of consumption, and the socioeconomic
 				consequences for communities caught in the tides of climate change. What does it mean to
-				hope in a time of reckoning? How can we balance development with environmental responsibility?
+				hope in a time of reckoning? How can we balance development with environmental
+				responsibility?
 			</Typography>
 
 			<Typography variant="body" className="text-base sm:text-lg leading-relaxed">
@@ -38,6 +39,14 @@
 			<Typography variant="body" className="italic text-[#70492b] text-lg sm:text-xl pt-2">
 				Step into the flow of consequence. Dare to hope with <em lang="fr">Espérer</em>.
 			</Typography>
+
+			<div class="pt-4">
+				<button
+					class="transform rounded-xl bg-[#9d5d2c] px-6 py-3 text-lg font-semibold text-white shadow-md transition hover:scale-105 hover:bg-[#5c3d24] focus:ring-2 focus:ring-[#70492b] focus:ring-offset-2 focus:outline-none"
+				>
+					GET FOR FREE
+				</button>
+			</div>
 		</div>
 	</div>
 </section>
