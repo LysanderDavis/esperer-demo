@@ -87,5 +87,28 @@
 	</div>
 </section>
 
-<!-- Smooth Fade Transition into Footer -->
-<div class="h-14 w-full bg-gradient-to-b from-transparent to-[#b06b35]"></div>
+<style>
+	.max-w-3xl {
+		position: relative;
+		background: #fdf8f4;
+		padding: 2.5rem 2.5rem; /* same as p-10 */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		border-radius: 1.5rem; /* rounded-3xl */
+	}
+
+	.max-w-3xl::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -20px; /* just below the container */
+		height: 40px;
+		background: url('data:image/svg+xml;utf8,<svg width="100%" height="40" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg"><path fill="%23fdf8f4" d="M0,40 C360,0 1080,80 1440,40 L1440,40 L0,40 Z"/></svg>')
+			repeat-x bottom;
+		background-size: contain;
+		filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+		border-bottom-left-radius: 1.5rem;
+		border-bottom-right-radius: 1.5rem;
+		pointer-events: none;
+	}
+</style>
