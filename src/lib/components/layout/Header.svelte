@@ -8,7 +8,7 @@
 
 	// Detect screen size
 	const checkScreen = () => {
-		isMobile = window.innerWidth < 1024; // lg breakpoint
+		isMobile = window.innerWidth < 1028; // lg breakpoint
 	};
 
 	if (typeof window !== 'undefined') {
