@@ -34,25 +34,25 @@
 		>
 			<span
 				lang="fr"
-				class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				class="font-extrabold text-[#9d5d2c]"
 			>
 				Espérer
 			</span>
 			spans across&nbsp;
-			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			<span class="font-extrabold text-[#9d5d2c]"
 				>1</span
 			>&nbsp;continent reaching&nbsp;
-			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			<span class="font-extrabold text-[#9d5d2c]"
 				>{stats.countriesReached}</span
 			>&nbsp; countries and mobilizing&nbsp;
-			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			<span class="font-extrabold text-[#9d5d2c]"
 				>{stats.volunteers}</span
 			>&nbsp; dedicated volunteers who make a&nbsp;
-			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			<span class="font-extrabold text-[#9d5d2c]"
 				>difference</span
 			>
 			not only in their local community, but&nbsp;
-			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			<span class="font-extrabold text-[#9d5d2c]"
 				>worldwide</span
 			>.
 		</Typography>

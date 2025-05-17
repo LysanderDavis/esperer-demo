@@ -76,7 +76,7 @@
 	>
 		<Typography
 			variant="h1"
-			className="text-[#9d5d2c] text-6xl font-bold drop-shadow-[0_2px_6px_rgba(157,93,44,0.5)]"
+			className="text-[#9d5d2c] text-6xl font-bold"
 		>
 			{current.toLocaleString()}
 		</Typography>
