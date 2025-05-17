@@ -28,7 +28,7 @@
 		<Typography
 			variant="body"
 			className="
-    mt-8 max-w-3xl mx-auto text-xl italic text-gray-700 dark:text-gray-300 px-6 leading-relaxed
+    mt-8 max-w-3xl mx-auto text-2xl italic text-gray-700 dark:text-gray-300 px-6 leading-relaxed
     drop-shadow-sm
   "
 		>
