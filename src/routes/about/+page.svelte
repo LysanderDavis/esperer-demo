@@ -9,38 +9,32 @@
 		{
 			title: 'Hope',
 			description:
-				'Espérer was founded with one vital goal in mind: instill hope in humanity to eradicate climate change and its side effects. However close the Earth temperature approaches 2.0ºC, we remain hopeful.',
-			icon: '✨'
+				'Espérer was founded with one vital goal in mind: instill hope in humanity to eradicate climate change and its side effects. However close the Earth temperature approaches 2.0ºC, we remain hopeful.'
 		},
 		{
 			title: 'Perseverance',
 			description:
-				'We understand that fighting for the environment is an uphill battle, a trench warfare if you will. Instead of doomerism, we begin the fight and never surrender. We never leave the arena until we win. Never.',
-			icon: '💪'
+				'We understand that fighting for the environment is an uphill battle, a trench warfare if you will. Instead of doomerism, we begin the fight and never surrender. We never leave the arena until we win. Never.'
 		},
 		{
 			title: 'Community',
 			description:
-				'Espérer is not just a monthly magazine. Neither is it a recycling center location app, or podcast series and YouTube content. Espérer is an idea that a community of independent, free thinkers is capable of anything.',
-			icon: '👥'
+				'Espérer is not just a monthly magazine. Neither is it a recycling center location app, or podcast series and YouTube content. Espérer is an idea that a community of independent, free thinkers is capable of anything.'
 		},
 		{
 			title: 'Integrity',
 			description:
-				'Espérer is not done just for another tick. We value transparency and accountability and abide by our strong ethical principles to make a REAL difference in the world.',
-			icon: '🔍'
+				'Espérer is not done just for another tick. We value transparency and accountability and abide by our strong ethical principles to make a REAL difference in the world.'
 		},
 		{
 			title: 'Innovation',
 			description:
-				"Being a seed of human creativity, innovative ideas always drive us forward, whether locally or globally, and they always will. As we tighten our grip, let's innovate our way to a sustainable future.",
-			icon: '💡'
+				"Being a seed of human creativity, innovative ideas always drive us forward, whether locally or globally, and they always will. As we tighten our grip, let's innovate our way to a sustainable future."
 		},
 		{
 			title: 'Competence',
 			description:
-				'Espérer focuses on achieving the greatest possible impact by delivering credible and well-researched content, ideas, and solutions. We work to ensure that every message is thoughtful and informed.',
-			icon: '🎯'
+				'Espérer focuses on achieving the greatest possible impact by delivering credible and well-researched content, ideas, and solutions. We work to ensure that every message is thoughtful and informed.'
 		}
 	];
 
@@ -106,7 +100,6 @@
 							transition:fly={{ y: 30, duration: 700, delay: i * 120, easing: quintOut }}
 						>
 							<div class="mb-4 flex items-center">
-								<span class="mr-4 text-4xl">{pillar.icon}</span>
 								<Typography variant="h2" className="text-[#9d5d2c]">
 									{pillar.title}
 								</Typography>
