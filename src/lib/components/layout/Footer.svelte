@@ -3,7 +3,7 @@
 		{ name: 'Linktree', href: 'https://linktr.ee/esperer8', icon: '/Linktree.svg' },
 		{ name: 'YouTube', href: 'https://www.youtube.com/@Esp%C3%A9rer8', icon: '/Youtube.svg' },
 		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
-		{ name: 'Substack', href: '/', icon: '/Substack.svg' },
+		{ name: 'Substack', href: 'https://substack.com/@esperer8?utm_campaign=unknown&utm_medium=web', icon: '/Substack.svg' },
 		{ name: 'Telegram', href: '/', icon: '/Telegram.svg' },
 		{ name: 'Buy Us a Coffee', href: '/', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: '/', icon: '/Instagram.svg' },
