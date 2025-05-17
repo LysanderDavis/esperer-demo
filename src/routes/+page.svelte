@@ -25,13 +25,36 @@
 			<StatsCounter label="Countries Reached" count={stats.countriesReached} />
 		</div>
 
-		<Typography variant="body" className="mt-5 max-w-3xl mx-auto text-xl italic text-gray-700 px-4">
-			<span lang="fr" class="font-bold text-[#9d5d2c]">Espérer</span> spans across
-			<span class="font-bold text-[#9d5d2c]">1</span>
-			continents reaching <span class="font-bold text-[#9d5d2c]">{stats.countriesReached}</span>
-			countries and mobilizing <span class="font-bold text-[#9d5d2c]">{stats.volunteers}</span>
-			dedicated volunteers who make a <span class="font-bold text-[#9d5d2c]">difference</span> not
-			only in their local community, but <span class="font-bold text-[#9d5d2c]">worldwide</span>.
+		<Typography
+			variant="body"
+			className="
+    mt-8 max-w-3xl mx-auto text-xl italic text-gray-700 dark:text-gray-300 px-6 leading-relaxed
+    drop-shadow-sm
+  "
+		>
+			<span
+				lang="fr"
+				class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+			>
+				Espérer
+			</span>
+			spans across&nbsp;
+			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				>1</span
+			>&nbsp;continent reaching&nbsp;
+			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				>{stats.countriesReached}</span
+			>&nbsp; countries and mobilizing&nbsp;
+			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				>{stats.volunteers}</span
+			>&nbsp; dedicated volunteers who make a&nbsp;
+			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				>difference</span
+			>
+			not only in their local community, but&nbsp;
+			<span class="font-extrabold text-[#9d5d2c] drop-shadow-[0_1px_1px_rgba(157,93,44,0.3)]"
+				>worldwide</span
+			>.
 		</Typography>
 	</div>
 </section>

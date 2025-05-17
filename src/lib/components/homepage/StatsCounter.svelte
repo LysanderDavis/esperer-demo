@@ -2,13 +2,14 @@
 	import { onMount } from 'svelte';
 	import Typography from '$lib/components/Typography.svelte';
 
-	export let label = 'People Reached';
+	export let label = 'Lives touched by our journey';
 	export let count = 100000;
 
 	let current = 0;
-	let duration = 2000; // animation duration in ms
+	let duration = 2000;
 	let hasAnimated = false;
 	let element: HTMLDivElement;
+	let clicked = false;
 
 	function startAnimation() {
 		if (hasAnimated) return;
@@ -31,6 +32,12 @@
 		requestAnimationFrame(animate);
 	}
 
+	function handleClick() {
+		clicked = !clicked;
+		// For example: alert or toggle some state
+		// alert(`Card clicked! Current count: ${current}`);
+	}
+
 	onMount(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -42,7 +49,7 @@
 				});
 			},
 			{
-				threshold: 0.5 // start when 50% visible
+				threshold: 0.5
 			}
 		);
 
@@ -52,11 +59,48 @@
 	});
 </script>
 
-<div bind:this={element} class="p-14 text-center">
-	<Typography variant="h1" className="text-[#9d5d2c] text-6xl">
-		{current.toLocaleString()}
-	</Typography>
-	<Typography variant="body" className="text-secondary mt-2 text-2xl">
-		{label}
-	</Typography>
+<div bind:this={element} class="flex items-center justify-center p-6">
+	<div
+		role="button"
+		tabindex="0"
+		class="card w-full max-w-sm rounded-2xl bg-white p-10 text-center"
+		class:clicked
+		style="box-shadow: 0 10px 25px rgba(157, 93, 44, 0.4);"
+		on:click={handleClick}
+		on:keydown={(e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				handleClick();
+			}
+		}}
+	>
+		<Typography
+			variant="h1"
+			className="text-[#9d5d2c] text-6xl font-bold drop-shadow-[0_2px_6px_rgba(157,93,44,0.5)]"
+		>
+			{current.toLocaleString()}
+		</Typography>
+		<Typography
+			variant="body"
+			className="text-gray-600 dark:text-gray-300 mt-4 text-xl leading-relaxed italic"
+		>
+			{label}
+		</Typography>
+	</div>
 </div>
+
+<style>
+	.card {
+		cursor: pointer;
+		transition:
+			box-shadow 0.3s ease,
+			transform 0.3s ease;
+	}
+	.card:hover {
+		box-shadow: 0 15px 30px rgba(157, 93, 44, 0.7);
+		transform: translateY(-10px) scale(1.05);
+	}
+	.card.clicked {
+		border: 3px solid #9d5d2c;
+	}
+</style>
