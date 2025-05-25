@@ -7,7 +7,8 @@
 		{ name: 'Telegram', href: 'https://t.me/Esperer8', icon: '/Telegram.svg' },
 		{ name: 'Buy Us a Book', href: 'https://buymeacoffee.com/esperer8', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: 'https://www.instagram.com/esperer08', icon: '/Instagram.svg' },
-		{ name: 'Bluesky', href: 'https://bsky.app/profile/esperer8.substack.com', icon: '/Bluesky.svg' }
+		{ name: 'Bluesky', href: 'https://bsky.app/profile/esperer8.substack.com', icon: '/Bluesky.svg' },
+		{ name: 'X', href: 'https://x.com/Esprer497108', icon: '/X.svg' }
 	];
 
 	const aboutUs = [
