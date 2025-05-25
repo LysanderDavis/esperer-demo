@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Typography from '$lib/components/Typography.svelte';
 	import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
