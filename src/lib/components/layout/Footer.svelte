@@ -3,16 +3,24 @@
 		{ name: 'Linktree', href: 'https://linktr.ee/esperer8', icon: '/Linktree.svg' },
 		{ name: 'YouTube', href: 'https://www.youtube.com/@Esp%C3%A9rer8', icon: '/Youtube.svg' },
 		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
-		{ name: 'Substack', href: 'https://substack.com/@esperer8?utm_campaign=unknown&utm_medium=web', icon: '/Substack.svg' },
+		{
+			name: 'Substack',
+			href: 'https://substack.com/@esperer8?utm_campaign=unknown&utm_medium=web',
+			icon: '/Substack.svg'
+		},
 		{ name: 'Telegram', href: 'https://t.me/Esperer8', icon: '/Telegram.svg' },
 		{ name: 'Buy Us a Book', href: 'https://buymeacoffee.com/esperer8', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: 'https://www.instagram.com/esperer08', icon: '/Instagram.svg' },
-		{ name: 'Bluesky', href: 'https://bsky.app/profile/esperer8.substack.com', icon: '/Bluesky.svg' },
+		{
+			name: 'Bluesky',
+			href: 'https://bsky.app/profile/esperer8.substack.com',
+			icon: '/Bluesky.svg'
+		},
 		{ name: 'X', href: 'https://x.com/Esprer497108', icon: '/X.svg' }
 	];
 
 	const aboutUs = [
-/* 		{ name: 'Our Mission', href: '/our-mission' }, */
+		/* 		{ name: 'Our Mission', href: '/our-mission' }, */
 		{ name: 'Six Pillars of Espérer', href: '/six-pillars' }
 	];
 	const ourWork = [
@@ -73,14 +81,13 @@
 			<div class="w-full max-w-sm">
 				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter!</h3>
 				<div class="rounded-lg bg-white p-3">
-					<iframe 
-						src="https://esperer8.substack.com/embed" 
-						width="100%" 
-						height="240" 
-						style="border: none; background: white;" 
-						frameborder="0" 
+					<iframe
+						src="https://esperer8.substack.com/embed"
+						width="100%"
+						height="240"
+						style="border:1px solid #EEE; background:white;"
+						frameborder="0"
 						scrolling="no"
-						title="Substack Newsletter Signup"
 					></iframe>
 				</div>
 			</div>
