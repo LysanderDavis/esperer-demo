@@ -85,7 +85,7 @@
 						src="https://esperer8.substack.com/embed"
 						width="100%"
 						height="240"
-						style="border:1px solid #EEE;"
+						style="border:1px solid #FFFBEB;"
 						frameborder="0"
 						scrolling="no"
 					></iframe>
