@@ -18,31 +18,6 @@
 		{ name: 'Global Impact', href: '/global-impact' },
 		{ name: 'Our E-magazine', href: '/our-journal' }
 	];
-
-	let email = '';
-	let emailError = '';
-	let successMessage = '';
-
-	function validateEmail(email: string) {
-		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return re.test(email.toLowerCase());
-	}
-
-	function handleSubmit() {
-		emailError = '';
-		successMessage = '';
-
-		if (!validateEmail(email)) {
-			emailError = 'Please enter a valid email address.';
-			return;
-		}
-
-		// Simulate API call
-		setTimeout(() => {
-			successMessage = 'Thank you for subscribing!';
-			email = '';
-		}, 1000);
-	}
 </script>
 
 <footer class="bg-[#b06b35] py-12 text-white">
@@ -92,29 +67,20 @@
 			</div>
 		</div>
 
-		<!-- Newsletter (smaller max width) -->
+		<!-- Newsletter (Substack embed with similar styling) -->
 		<div class="flex w-full">
 			<div class="w-full max-w-sm">
-				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter! (Not Yet Functional)</h3>
-				<div class="flex flex-col space-y-3">
-					<input
-						type="email"
-						placeholder="Your email address"
-						bind:value={email}
-						class="rounded-lg p-3 text-black focus:ring-2 focus:ring-white focus:outline-none"
-					/>
-					<button
-						on:click={handleSubmit}
-						class="hover:bg-opacity-80 rounded-lg bg-white p-3 font-semibold text-[#b06b35] transition"
-					>
-						Subscribe
-					</button>
-					{#if emailError}
-						<p class="text-sm text-red-200">{emailError}</p>
-					{/if}
-					{#if successMessage}
-						<p class="text-sm text-green-200">{successMessage}</p>
-					{/if}
+				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter!</h3>
+				<div class="rounded-lg bg-white p-3">
+					<iframe 
+						src="https://esperer8.substack.com/embed" 
+						width="100%" 
+						height="240" 
+						style="border: none; background: white;" 
+						frameborder="0" 
+						scrolling="no"
+						title="Substack Newsletter Signup"
+					></iframe>
 				</div>
 			</div>
 		</div>
