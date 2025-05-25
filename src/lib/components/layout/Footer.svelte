@@ -60,8 +60,8 @@
 				<h3 class="mb-4 text-xl font-semibold">Contact Us</h3>
 				<p>Email:</p>
 				<p>
-					<a href="mailto:hello@esperer.org" class="font-bold underline hover:text-gray-300">
-						we don't have an email yet :)
+					<a href="mailto:esperer8@substack.com" class="font-bold underline hover:text-gray-300">
+						esperer8@substack.com
 					</a>
 				</p>
 			</div>
