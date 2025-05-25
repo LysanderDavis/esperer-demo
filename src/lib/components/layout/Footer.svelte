@@ -5,7 +5,7 @@
 		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
 		{ name: 'Substack', href: 'https://substack.com/@esperer8?utm_campaign=unknown&utm_medium=web', icon: '/Substack.svg' },
 		{ name: 'Telegram', href: 'https://t.me/Esperer8', icon: '/Telegram.svg' },
-		{ name: 'Buy Us a Coffee', href: '/', icon: '/Cup.svg' },
+		{ name: 'Buy Us a Coffee', href: 'buymeacoffee.com/esperer8', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: 'https://www.instagram.com/esperer08', icon: '/Instagram.svg' },
 		{ name: 'Bluesky', href: 'https://bsky.app/profile/esperer8.substack.com', icon: '/Bluesky.svg' }
 	];
