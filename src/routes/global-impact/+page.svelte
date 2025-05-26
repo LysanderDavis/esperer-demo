@@ -11,14 +11,14 @@
 
 	const members: { name: string; location: LatLngTuple; description: string }[] = [
 		{
-			name: 'Igor Tokach',
-			location: [38.7, 65.7847], // Qarshi
-			description: 'Volunteer (Qarshi, Uzbekistan)'
+			name: 'Shohjahon Isroilov',
+			location: [41.3, 69.3401], // Tashkent
+			description: 'Volunteer (Tashkent, Uzbekistan)'
 		},
 		{
-			name: 'Javelin Gaziyev',
-			location: [38.8611, 65.7847], // Qarshi
-			description: 'Volunteer (Qarshi, Uzbekistan)'
+			name: 'Samariddin Gaziyev',
+			location: [41.2995, 69.2401], // Tashkent
+			description: 'Volunteer (Tashkent, Uzbekistan)'
 		},
 		{
 			name: 'Muhammadlaziz Ibaydullayev',
@@ -27,8 +27,8 @@
 		},
 		{
 			name: 'Anna Novikova',
-			location: [41.2995, 69.2401], // Tashkent
-			description: 'Volunteer (Tashkent, Uzbekistan)'
+			location: [42.2965, -71.2924], // Wellesley, Massachusetts
+			description: 'Volunteer (Wellesley, Massachusetts, USA)'
 		}
 	];
 
@@ -38,7 +38,7 @@
 		<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
 	</svg>`,
 		iconSize: [32, 32],
-		iconAnchor: [16, 32], // anchor at bottom of icon
+		iconAnchor: [16, 32],
 		popupAnchor: [0, -32]
 	});
 
