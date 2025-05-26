@@ -15,7 +15,7 @@
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="description" content="Mapping a Sustainable Future" />
-	<meta property="og:description" content="Join Us for Global Impact" />
+	<meta property="og:description" content="Mapping a Sustainable Future" />
 	<meta property="og:site_name" content="Espérer" />
 	<meta name="twitter:title" content="Espérer" />
 	<meta
