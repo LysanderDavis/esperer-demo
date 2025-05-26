@@ -10,7 +10,7 @@
 	<meta property="og:url" content="https://esperer.netlify.app" />
 	<meta
 		property="og:image"
-		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
+		content="https://esperer.netlify.app/esperer-high-resolution-logo.png"
 	/>
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -19,13 +19,8 @@
 	<meta property="og:site_name" content="Espérer" />
 	<meta name="twitter:title" content="Espérer" />
 	<meta
-		property="x:image"
-		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
-	/>
-
-	<meta
-		property="og:image"
-		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
+		property="twitter:image"
+		content="https://esperer.netlify.app/esperer-high-resolution-logo.png"
 	/>
 </svelte:head>
 
