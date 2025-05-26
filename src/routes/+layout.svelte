@@ -22,6 +22,10 @@
 		name="twitter:image"
 		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
 	/>
+	<meta
+		name="image"
+		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
+	/>
 </svelte:head>
 
 <main class="min-h-screen bg-[your-color]">
