@@ -8,6 +8,7 @@
 			href: 'https://substack.com/@esperer8?utm_campaign=unknown&utm_medium=web',
 			icon: '/Substack.svg'
 		},
+		{ name: 'TikTok', href: 'https://www.tiktok.com/@esperer08', icon: '/tiktok.svg' },
 		{ name: 'Telegram', href: 'https://t.me/Esperer8', icon: '/Telegram.svg' },
 		{ name: 'Buy Us a Book', href: 'https://buymeacoffee.com/esperer8', icon: '/Cup.svg' },
 		{ name: 'Instagram', href: 'https://www.instagram.com/esperer08', icon: '/Instagram.svg' },
