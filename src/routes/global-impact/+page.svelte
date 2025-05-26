@@ -16,6 +16,11 @@
 			description: 'Volunteer (Tashkent, Uzbekistan)'
 		},
 		{
+			name: 'Sevara Senvoleva',
+			location: [41.34, 69.3401], // Tashkent
+			description: 'Volunteer (Tashkent, Uzbekistan)'
+		},
+		{
 			name: 'Samariddin Gaziyev',
 			location: [41.2995, 69.2401], // Tashkent
 			description: 'Volunteer (Tashkent, Uzbekistan)'
