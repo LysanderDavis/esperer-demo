@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Typography from '$lib/components/Typography.svelte';
 	import { onMount } from 'svelte';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
 	// Data for the six pillars
