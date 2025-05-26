@@ -16,7 +16,7 @@
 			description: 'Volunteer (Tashkent, Uzbekistan)'
 		},
 		{
-			name: 'Sevara Senvoleva',
+			name: 'Sevara Kodirova',
 			location: [41.34, 69.3401], // Tashkent
 			description: 'Volunteer (Tashkent, Uzbekistan)'
 		},
