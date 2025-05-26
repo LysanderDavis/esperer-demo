@@ -19,11 +19,12 @@
 	<meta property="og:site_name" content="Espérer" />
 	<meta name="twitter:title" content="Espérer" />
 	<meta
-		name="twitter:image"
+		property="x:image"
 		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
 	/>
+
 	<meta
-		name="image"
+		property="og:image"
 		content="https://esperer.netlify.app/esperer-high-resolution-logo-transparent.png"
 	/>
 </svelte:head>
