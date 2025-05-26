@@ -83,6 +83,7 @@
 				<h3 class="mb-4 text-center text-xl font-semibold md:text-left">Join our newsletter!</h3>
 				<div class="rounded-lg bg-white p-3">
 					<iframe
+						title="Substack Newsletter"
 						src="https://esperer8.substack.com/embed"
 						width="100%"
 						height="240"
