@@ -8,8 +8,8 @@
 	// Here, define your stats once to make it easy to update
 	const stats = {
 		peopleReached: 20,
-		volunteers: 4,
-		countriesReached: 1
+		volunteers: 5,
+		countriesReached: 2
 	};
 </script>
 

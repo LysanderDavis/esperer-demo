@@ -21,7 +21,7 @@
 	<div class="w-full bg-[#9d5d2c]">
 		<div class="flex items-center justify-between px-6 py-4 sm:px-12 lg:px-24">
 			<!-- Logo -->
-			<a href="/" class="flex items-center">
+			<a href="/" class="flex items-center" on:click={() => (document.title = 'Espérer')}>
 				<img
 					src={isMobile ? '/mobile-logo.svg' : '/esprer-logo-transparent.svg'}
 					alt="Espérer"

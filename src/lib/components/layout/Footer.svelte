@@ -36,7 +36,7 @@
 		<div class="grid grid-cols-1 gap-y-8 md:grid-cols-4">
 			<!-- Logo -->
 			<div class="md:pr-4">
-				<a href="/" class="flex items-center">
+				<a href="/" class="flex items-center" on:click={() => (document.title = 'Espérer')}>
 					<img src={'/esprer-logo-transparent.svg'} alt="Espérer" class="mb-5 h-[72px]" />
 				</a>
 			</div>
