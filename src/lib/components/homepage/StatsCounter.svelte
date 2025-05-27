@@ -82,7 +82,7 @@
 		</Typography>
 		<Typography
 			variant="body"
-			className="text-gray-600 dark:text-gray-300 mt-4 text-xl leading-relaxed italic"
+			className="dark:text-gray-600 mt-4 text-xl leading-relaxed italic"
 		>
 			{label}
 		</Typography>
