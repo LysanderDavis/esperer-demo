@@ -17,7 +17,7 @@
 			href: 'https://bsky.app/profile/esperer8.substack.com',
 			icon: '/Bluesky.svg'
 		},
-		{ name: 'X', href: 'https://x.com/Esprer497108', icon: '/X.svg' }
+		{ name: 'X', href: 'https://x.com/Esperer08', icon: '/X.svg' }
 	];
 
 	const aboutUs = [
