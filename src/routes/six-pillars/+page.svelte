@@ -30,6 +30,13 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Six Pillars of Espérer | Mapping a Sustainable Future</title>
+	<meta
+		name="description"
+		content="The Six Pillars of Espérer: Hope, Perseverance, Community, Integrity, Innovation, and Competence - guiding us towards a sustainable future"
+	/>
+</svelte:head>
 <section class="relative flex flex-col items-center overflow-hidden pt-40 sm:px-12 lg:px-24">
 	<!-- Decorative Background Blobs -->
 	<div
