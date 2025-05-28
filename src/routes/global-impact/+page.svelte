@@ -64,6 +64,14 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Global Impact | Mapping a Sustainable Future</title>
+	<meta
+		name="description"
+		content="The Map of Global Impact: Discover the members of Espérer and their contributions to a sustainable future."
+	/>
+</svelte:head>
+
 <!-- Main Layout -->
 <div class="flex min-h-screen flex-col bg-[#f5e9dc] pt-40 pb-4">
 	<!-- Content (title + map) -->
