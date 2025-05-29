@@ -27,7 +27,7 @@
 		},
 		{
 			name: 'Muhammadlaziz Ibaydullayev',
-			location: [40.7821, 72.3442], // Andijan
+			location: [40.62177, 72.45236], // Andijan
 			description: 'Founder (Andijan, Uzbekistan)'
 		},
 		{
