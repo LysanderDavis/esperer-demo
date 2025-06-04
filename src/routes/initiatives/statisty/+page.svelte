@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { supabase } from '$lib/supabaseClient.js';
+	import { supabase } from '$lib/supabaseClient';
 	import type { User } from '@supabase/supabase-js';
 	import Typography from '$lib/components/Typography.svelte';
+	import AuthForm from '$lib/components/auth/AuthForm.svelte';
 
 	let user: User | null = null;
 	let height_cm = '';
@@ -12,11 +13,19 @@
 	let carbon_footprint = '';
 	let insights: any = null;
 	let loading = false;
+	let saveSuccess = false;
+
+	async function handleSignOut() {
+		await supabase.auth.signOut();
+		user = null;
+		insights = null;
+	}
 
 	async function calculateInsights() {
 		if (!user) return;
 
 		loading = true;
+		saveSuccess = false;
 		try {
 			// Save to Supabase
 			const { error } = await supabase.from('user_data').insert({
@@ -99,6 +108,8 @@
 				hydrationTips,
 				carbonFootprintTips
 			};
+
+			saveSuccess = true;
 		} catch (error) {
 			console.error('Error:', error);
 		} finally {
@@ -111,12 +122,27 @@
 			data: { user: currentUser }
 		} = await supabase.auth.getUser();
 		user = currentUser;
+
+		// Subscribe to auth changes
+		supabase.auth.onAuthStateChange((_event, session) => {
+			user = session?.user ?? null;
+		});
 	});
 </script>
 
 <div class="min-h-screen bg-gradient-to-br from-[#f9f7f4] to-[#f5e4d7] px-6 pt-32 pb-16">
 	<div class="mx-auto max-w-4xl">
-		<Typography variant="h1" className="mb-8 text-[#9d5d2c]">Statisty Health Tracker</Typography>
+		<div class="mb-8 flex items-center justify-between">
+			<Typography variant="h1" className="text-[#9d5d2c]">Statisty Health Tracker</Typography>
+			{#if user}
+				<button
+					on:click={handleSignOut}
+					class="rounded-md bg-white px-4 py-2 text-[#9d5d2c] hover:bg-gray-50"
+				>
+					Sign Out
+				</button>
+			{/if}
+		</div>
 
 		{#if user}
 			<div class="rounded-xl bg-white p-8 shadow-lg">
@@ -186,6 +212,16 @@
 						/>
 					</div>
 
+					{#if saveSuccess}
+						<div class="md:col-span-2">
+							<div class="rounded-md bg-green-50 p-4">
+								<Typography variant="body" className="text-green-700"
+									>Data saved successfully!</Typography
+								>
+							</div>
+						</div>
+					{/if}
+
 					<button
 						type="submit"
 						class="md:col-span-2 rounded-md bg-[#9d5d2c] px-4 py-2 text-white hover:bg-[#8a4f23] focus:outline-none focus:ring-2 focus:ring-[#9d5d2c] focus:ring-offset-2"
@@ -239,12 +275,8 @@
 				{/if}
 			</div>
 		{:else}
-			<div class="rounded-xl bg-white p-8 text-center shadow-lg">
-				<Typography variant="h2" className="mb-4 text-[#9d5d2c]">Please Sign In</Typography>
-				<p class="text-gray-600">
-					You need to be signed in to use the Statisty Health Tracker. Please sign in or create an
-					account to continue.
-				</p>
+			<div class="flex justify-center">
+				<AuthForm />
 			</div>
 		{/if}
 	</div>
