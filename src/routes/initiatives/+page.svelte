@@ -5,7 +5,7 @@
 		{
 			name: 'Statisty',
 			description:
-				'A quantified self platform empowering individuals to understand and optimize their lives through data.',
+				'A quantified self platform empowering individuals to understand and optimize their lives for a sustainable and healthy lifestyle.',
 			image: '/statisty-banner.png',
 			link: '/initiatives/statisty'
 		}
