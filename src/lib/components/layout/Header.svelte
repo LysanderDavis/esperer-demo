@@ -31,7 +31,7 @@
 
 			<!-- Desktop Links -->
 			<div class="hidden items-center space-x-8 text-white lg:flex">
-				<a href="/about" class="transition-colors hover:underline">About Us</a>
+				<a href="/about" class="transition-colors hover:underline">About</a>
 				<a href="/global-impact" class="transition-colors hover:underline">Global Impact</a>
 				<a href="mailto:esperer8@substack.com" class="transition-colors hover:underline">Contact</a
 				>
