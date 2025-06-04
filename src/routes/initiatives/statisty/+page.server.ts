@@ -1,11 +1,18 @@
-import { createServerClient } from '@supabase/auth-helpers-sveltekit/server';
-import type { PageServerLoad } from './$types';
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
+import { createServerClient } from '@supabase/ssr';
+import type { PageServerLoad } from './$types.js';
+import { env } from '$env/dynamic/public';
 
-export const load: PageServerLoad = async ({ cookies, request }) => {
-	const supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
-		cookies,
-		request
+export const load: PageServerLoad = async ({ cookies }) => {
+	const supabase = createServerClient(env.PUBLIC_SUPABASE_URL!, env.PUBLIC_SUPABASE_ANON_KEY!, {
+		cookies: {
+			get: (key) => cookies.get(key),
+			set: (key, value, options) => {
+				cookies.set(key, value, { ...options, path: '/' });
+			},
+			remove: (key, options) => {
+				cookies.delete(key, { ...options, path: '/' });
+			}
+		}
 	});
 
 	const {
