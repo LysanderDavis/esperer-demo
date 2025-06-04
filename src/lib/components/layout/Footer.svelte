@@ -1,6 +1,6 @@
 <script lang="ts">
 	const socialLinks = [
-		{ name: 'Linktree', href: 'https://linktr.ee/esperer8', icon: '/Linktree.svg' },
+		{ name: 'Linktree', href: 'https://linktr.ee/esperer8', icon: '/linktree.svg' },
 		{ name: 'YouTube', href: 'https://www.youtube.com/@Esp%C3%A9rer8', icon: '/Youtube.svg' },
 		{ name: 'Donate', href: '/', icon: '/Heart.svg' },
 		{
