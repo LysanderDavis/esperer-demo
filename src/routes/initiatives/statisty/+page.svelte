@@ -1,28 +1,22 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { supabase } from '$lib/supabaseClient.js';
+	import type { User } from '@supabase/supabase-js';
 
-	async function saveUserData(height_cm: number, weight_kg: number) {
+	let user: User | null = null;
+
+	onMount(async () => {
 		const {
-			data: { user },
-			error: userError
+			data: { user: currentUser }
 		} = await supabase.auth.getUser();
-		if (userError || !user) {
-			console.error('User not logged in or error fetching user:', userError);
-			return;
-		}
-
-		const { error } = await supabase.from('user_data').upsert({
-			user_id: user.id,
-			height_cm,
-			weight_kg
-		});
-
-		if (error) {
-			console.error('Error saving data:', error.message);
-		} else {
-			console.log('User data saved successfully');
-		}
-	}
+		user = currentUser;
+	});
 </script>
 
-<!-- Your page markup here -->
+<h1 class="text-2xl font-semibold">Welcome to Statisty</h1>
+
+{#if user}
+	<p class="mt-4">Logged in as {user.email}</p>
+{:else}
+	<p class="mt-4">Not logged in.</p>
+{/if}

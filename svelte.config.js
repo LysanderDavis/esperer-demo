@@ -15,4 +15,10 @@ const config = {
 	}
 };
 
+kit: {
+	alias: {
+		$lib: 'src/lib';
+	}
+}
+
 export default config;
