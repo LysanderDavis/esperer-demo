@@ -4,24 +4,53 @@
 	import { supabase } from '$lib/supabaseClient.js';
 	import { user } from '$lib/stores/user.js';
 	import { onMount } from 'svelte';
-	import type { User } from '@supabase/supabase-js';
 	import { browser } from '$app/environment';
-	import { derived } from 'svelte/store';
+	import { goto } from '$app/navigation';
 
 	let menuOpen = false;
 	let isMobile = false;
-
-	// 🔁 Reactively track current user with correct typing
-	const currentUser = derived(user, ($user) => $user as User | null);
+	let loading = false;
 
 	// 🧠 Login with GitHub OAuth
 	const handleLogin = async (): Promise<void> => {
-		await supabase.auth.signInWithOAuth({ provider: 'github' });
+		try {
+			loading = true;
+			const { data, error } = await supabase.auth.signInWithOAuth({
+				provider: 'github',
+				options: {
+					redirectTo: `${window.location.origin}/dashboard`
+				}
+			});
+			if (error) throw error;
+			// No need to set user here, listener will update user store automatically
+		} catch (error) {
+			if (error instanceof Error) {
+				alert('Login failed: ' + error.message);
+			} else {
+				alert('Login failed: Unknown error');
+			}
+		} finally {
+			loading = false;
+		}
 	};
 
 	// 🧼 Logout
 	const handleLogout = async (): Promise<void> => {
-		await supabase.auth.signOut();
+		try {
+			loading = true;
+			const { error } = await supabase.auth.signOut();
+			if (error) throw error;
+			// Redirect to home after logout
+			window.location.href = '/';
+		} catch (error) {
+			if (error instanceof Error) {
+				alert('Logout failed: ' + error.message);
+			} else {
+				alert('Logout failed: Unknown error');
+			}
+		} finally {
+			loading = false;
+		}
 	};
 
 	// 📱 Responsive screen check (SSR safe)
@@ -62,33 +91,24 @@
 				<a href="/global-impact" class="transition-colors hover:underline">Global Impact</a>
 				<a href="/initiatives" class="transition-colors hover:underline">Initiatives</a>
 				<a href="mailto:esperer8@substack.com" class="transition-colors hover:underline">Contact</a>
-				<a
-					href="/join"
-					class="rounded-lg border border-[#a09175] bg-white px-4 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c]"
-				>
-					Get Involved
-				</a>
-				{#await currentUser}
-					<!-- loading fallback if needed -->
-				{:then user}
-					{#if currentUser}
-						<!-- 🧼 Logout: secondary action -->
-						<button
-							on:click={handleLogout}
-							class="rounded-lg border border-white px-4 py-2 text-sm text-white transition-all hover:border-gray-700 hover:text-black focus:ring-2 focus:ring-gray-300 focus:outline-none"
-						>
-							Logout
-						</button>
-					{:else}
-						<!-- 🎯 Get Involved: primary CTA -->
-						<a
-							href="/join"
-							class="rounded-lg bg-[#9d5d2c] px-5 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-[#7c451f] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
-						>
-							Get Involved
-						</a>
-					{/if}
-				{/await}
+
+				{#if $user}
+					<!-- Logged in: Show only Logout -->
+					<button
+						on:click={handleLogout}
+						class="rounded-lg border border-white px-4 py-2 text-sm text-white transition-all hover:border-gray-700 hover:text-black focus:ring-2 focus:ring-gray-300 focus:outline-none"
+					>
+						Logout
+					</button>
+				{:else}
+					<!-- Not logged in: Show Get Involved linking to /join -->
+					<button
+						on:click={handleLogin}
+						class="rounded-lg bg-[#b96b30] px-5 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-[#7c451f] focus:ring-2 focus:ring-[#c38b5f] focus:outline-none"
+					>
+						Login
+					</button>
+				{/if}
 			</div>
 
 			<!-- Mobile Hamburger -->
@@ -170,15 +190,16 @@
 						Get Involved
 					</a>
 
-					{#if currentUser}
+					{#if $user}
 						<button
 							on:click={() => {
 								handleLogout();
 								menuOpen = false;
 							}}
-							class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+							disabled={loading}
+							class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
 						>
-							Logout
+							{loading ? 'Logging out...' : 'Logout'}
 						</button>
 					{:else}
 						<button
@@ -186,9 +207,10 @@
 								handleLogin();
 								menuOpen = false;
 							}}
-							class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+							disabled={loading}
+							class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none disabled:pointer-events-none disabled:opacity-50"
 						>
-							Login
+							{loading ? 'Logging in...' : 'Login'}
 						</button>
 					{/if}
 				</div>

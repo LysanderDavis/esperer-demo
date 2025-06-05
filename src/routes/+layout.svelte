@@ -5,18 +5,7 @@
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/supabaseClient.js';
 	import { user } from '$lib/stores/user.js';
-
-	onMount(async () => {
-		const {
-			data: { session }
-		} = await supabase.auth.getSession();
-
-		user.set(session?.user ?? null);
-
-		supabase.auth.onAuthStateChange((_event, session) => {
-			user.set(session?.user ?? null);
-		});
-	});
+	import { writable } from 'svelte/store';
 </script>
 
 <svelte:head>

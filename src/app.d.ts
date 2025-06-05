@@ -9,5 +9,15 @@ declare global {
 		// interface Platform {}
 	}
 }
+/// <reference types="@sveltejs/kit" />
+
+// src/app.d.ts
+import type { Session } from '@supabase/supabase-js';
+
+declare namespace App {
+	interface Locals {
+		session?: Session | null;
+	}
+}
 
 export {};
