@@ -39,8 +39,8 @@
 			</span>
 			spans across&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]"
-				>1</span
-			>&nbsp;continent reaching&nbsp;
+				>2</span
+			>&nbsp;continents reaching&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]"
 				>{stats.countriesReached}</span
 			>&nbsp; countries and mobilizing&nbsp;
