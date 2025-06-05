@@ -2,6 +2,21 @@
 	import '../app.css';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import { onMount } from 'svelte';
+	import { supabase } from '$lib/supabaseClient.js';
+	import { user } from '$lib/stores/user.js';
+
+	onMount(async () => {
+		const {
+			data: { session }
+		} = await supabase.auth.getSession();
+
+		user.set(session?.user ?? null);
+
+		supabase.auth.onAuthStateChange((_event, session) => {
+			user.set(session?.user ?? null);
+		});
+	});
 </script>
 
 <svelte:head>

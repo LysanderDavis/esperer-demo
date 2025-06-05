@@ -34,7 +34,7 @@
 			>
 				<img
 					src={photo.current}
-					alt="Gallery image"
+					alt="Gallery object"
 					class="h-full w-full object-cover transition duration-300 ease-in-out hover:scale-110"
 				/>
 			</div>

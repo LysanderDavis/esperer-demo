@@ -37,7 +37,7 @@
 			<!-- Logo -->
 			<div class="md:pr-4">
 				<a href="/" class="flex items-center" on:click={() => (document.title = 'Espérer')}>
-					<img src={'/esprer-logo-transparent.svg'} alt="Espérer" class="mb-5 h-[72px]" />
+					<img src={'/esperer-logo-transparent.svg'} alt="Espérer" class="mb-5 h-[72px]" />
 				</a>
 			</div>
 
