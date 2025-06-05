@@ -16,7 +16,7 @@
 		try {
 			loading = true;
 			const { data, error } = await supabase.auth.signInWithOAuth({
-				provider: 'github',
+				provider: 'google',
 				options: {
 					redirectTo: `${window.location.origin}/dashboard`
 				}
