@@ -68,7 +68,7 @@
 </svelte:head>
 
 <div
-	class="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#f5e4d7] to-white px-4 py-8"
+	class="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#f5e4d7] to-white px-4 py-8 mt-7"
 >
 	<div class="w-full max-w-md">
 		<!-- Header -->
