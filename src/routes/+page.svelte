@@ -14,7 +14,7 @@
 </script>
 
 <HeroSection />
-
+n
 <section class="py-20">
 	<div class="text-center">
 		<Typography variant="h2" className=" text-5xl font-bold text-[#9d5d2c]">Our Impact</Typography>
@@ -31,29 +31,16 @@
     mt-8 max-w-3xl mx-auto text-2xl italic dark:text-gray-700 px-6 leading-relaxed
   "
 		>
-			<span
-				lang="fr"
-				class="font-extrabold text-[#9d5d2c]"
-			>
-				Espérer
-			</span>
+			<span lang="fr" class="font-extrabold text-[#9d5d2c]"> Espérer </span>
 			spans across&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]"
-				>2</span
-			>&nbsp;continents reaching&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]"
-				>{stats.countriesReached}</span
-			>&nbsp; countries and mobilizing&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]"
-				>{stats.volunteers}</span
-			>&nbsp; dedicated volunteers who make a&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]"
-				>difference</span
-			>
+			<span class="font-extrabold text-[#9d5d2c]">2</span>&nbsp;continents reaching&nbsp;
+			<span class="font-extrabold text-[#9d5d2c]">{stats.countriesReached}</span>&nbsp; countries
+			and mobilizing&nbsp;
+			<span class="font-extrabold text-[#9d5d2c]">{stats.volunteers}</span>&nbsp; dedicated
+			volunteers who make a&nbsp;
+			<span class="font-extrabold text-[#9d5d2c]">difference</span>
 			not only in their local community, but&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]"
-				>worldwide</span
-			>.
+			<span class="font-extrabold text-[#9d5d2c]">worldwide</span>.
 		</Typography>
 	</div>
 </section>
