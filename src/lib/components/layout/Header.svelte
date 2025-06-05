@@ -46,6 +46,9 @@
 		if (!target.closest('.user-dropdown-container')) {
 			userDropdownOpen = false;
 		}
+		if (!target.closest('.mobile-menu-container') && !target.closest('.hamburger-button')) {
+			menuOpen = false;
+		}
 	};
 
 	// Get user initials for avatar
@@ -172,9 +175,9 @@
 
 			<!-- Mobile Menu Toggle -->
 			<div class="flex items-center lg:hidden">
-				{#if $user}
-					<!-- Mobile User Avatar -->
-					<div class="user-dropdown-container relative mr-4">
+				{#if $user && isMobile}
+					<!-- Mobile User Avatar - Enhanced with full menu items -->
+					<div class="user-dropdown-container relative">
 						<button
 							on:click={() => (userDropdownOpen = !userDropdownOpen)}
 							class="focus:ring-opacity-50 flex h-10 w-10 items-center justify-center rounded-full bg-white font-semibold text-[#9d5d2c] shadow-md transition-all hover:scale-105 hover:shadow-lg focus:ring-2 focus:ring-white focus:outline-none"
@@ -186,9 +189,10 @@
 
 						{#if userDropdownOpen}
 							<div
-								class="absolute right-0 z-50 mt-2 w-[20rem] rounded-lg border border-gray-200 bg-white py-2 shadow-xl"
+								class="absolute right-0 z-50 mt-2 w-80 max-w-[calc(100vw-2rem)] rounded-lg border border-gray-200 bg-white py-2 shadow-xl"
 								transition:slide|local={{ duration: 200, easing: quintOut }}
 							>
+								<!-- User Info Section -->
 								<div class="border-b border-gray-100 px-4 py-2">
 									<p class="text-sm font-medium text-gray-900">
 										{$user.user_metadata?.full_name || 'User'}
@@ -196,6 +200,50 @@
 									<p class="text-xs text-gray-500">{$user.email}</p>
 								</div>
 
+								<!-- Navigation Links -->
+								<div class="border-b border-gray-100 py-2">
+									<a
+										href="/about"
+										class="flex w-full items-center px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#9d5d2c]"
+										on:click={() => (userDropdownOpen = false)}
+									>
+										About
+									</a>
+									<a
+										href="/global-impact"
+										class="flex w-full items-center px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#9d5d2c]"
+										on:click={() => (userDropdownOpen = false)}
+									>
+										Global Impact
+									</a>
+									<a
+										href="/initiatives"
+										class="flex w-full items-center px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#9d5d2c]"
+										on:click={() => (userDropdownOpen = false)}
+									>
+										Initiatives
+									</a>
+									<a
+										href="mailto:esperer8@substack.com"
+										class="flex w-full items-center px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#9d5d2c]"
+										on:click={() => (userDropdownOpen = false)}
+									>
+										Contact
+									</a>
+								</div>
+
+								<!-- Action Buttons -->
+								<div class="border-b border-gray-100 px-4 py-2">
+									<a
+										href="/join"
+										class="mb-2 flex w-full items-center justify-center rounded-lg border border-[#a09175] bg-white px-4 py-2 text-sm text-black transition-colors hover:bg-[#a09175] hover:text-white focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+										on:click={() => (userDropdownOpen = false)}
+									>
+										Get Involved
+									</a>
+								</div>
+
+								<!-- User Actions -->
 								<button
 									on:click={handleSettings}
 									class="flex w-full items-center px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-[#9d5d2c]"
@@ -238,93 +286,105 @@
 							</div>
 						{/if}
 					</div>
-				{/if}
-
-				<button
-					type="button"
-					aria-label="Toggle Menu"
-					aria-expanded={menuOpen}
-					on:click={() => (menuOpen = !menuOpen)}
-					class={`relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 focus:outline-none
-						${menuOpen ? 'border-[#9d5d2c] bg-[#9d5d2c]' : 'border-gray-400 bg-white'}`}
-				>
-					<div
-						class="relative flex h-6 w-6 flex-col items-center justify-center transition-all duration-500 ease-out"
+				{:else if !$user}
+					<!-- Hamburger Menu Button (only shown when not logged in on mobile) -->
+					<button
+						type="button"
+						aria-label="Toggle Menu"
+						aria-expanded={menuOpen}
+						on:click={() => (menuOpen = !menuOpen)}
+						class="hamburger-button relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 focus:outline-none {menuOpen
+							? 'border-[#9d5d2c] bg-[#9d5d2c]'
+							: 'border-gray-400 bg-white'}"
 					>
-						<span
-							class="block h-0.5 w-full transition-all duration-500 ease-in-out"
-							class:rotate-45={menuOpen}
-							class:translate-y-1.5={menuOpen}
-							class:bg-white={menuOpen}
-							class:bg-gray-700={!menuOpen}
-						></span>
-						<span
-							class="my-1 block h-0.5 w-full transition-all duration-500 ease-in-out"
-							class:opacity-0={menuOpen}
-							class:bg-white={menuOpen}
-							class:bg-gray-700={!menuOpen}
-						></span>
-						<span
-							class="block h-0.5 w-full transition-all duration-500 ease-in-out"
-							class:-rotate-45={menuOpen}
-							class:-translate-y-1.5={menuOpen}
-							class:bg-white={menuOpen}
-							class:bg-gray-700={!menuOpen}
-						></span>
-					</div>
-				</button>
+						<div
+							class="relative flex h-6 w-6 flex-col items-center justify-center transition-all duration-500 ease-out"
+						>
+							<span
+								class="block h-0.5 w-full transition-all duration-500 ease-in-out"
+								class:rotate-45={menuOpen}
+								class:translate-y-1.5={menuOpen}
+								class:bg-white={menuOpen}
+								class:bg-gray-700={!menuOpen}
+							></span>
+							<span
+								class="my-1 block h-0.5 w-full transition-all duration-500 ease-in-out"
+								class:opacity-0={menuOpen}
+								class:bg-white={menuOpen}
+								class:bg-gray-700={!menuOpen}
+							></span>
+							<span
+								class="block h-0.5 w-full transition-all duration-500 ease-in-out"
+								class:-rotate-45={menuOpen}
+								class:-translate-y-1.5={menuOpen}
+								class:bg-white={menuOpen}
+								class:bg-gray-700={!menuOpen}
+							></span>
+						</div>
+					</button>
+				{/if}
 			</div>
 		</div>
 	</div>
 
-	<!-- Mobile Nav -->
+	<!-- Mobile Nav (only shown when not logged in) -->
 	<div class="lg:hidden">
-		{#if menuOpen}
+		{#if menuOpen && !$user}
 			<div
-				class="absolute right-0 z-50 mt-2 w-[20rem] rounded-lg border border-gray-200 bg-white py-2 shadow-xl"
+				class="mobile-menu-container absolute inset-x-0 z-50 mx-4 mt-2 rounded-lg border border-gray-200 bg-white py-4 shadow-xl sm:mx-8"
 				transition:slide|local={{ duration: 500, easing: quintOut }}
 			>
-				<a
-					href="/about"
-					class="text-gray-700 transition-colors hover:text-[#a09175]"
-					on:click={() => (menuOpen = false)}>About</a
-				>
-				<a
-					href="/global-impact"
-					class="text-gray-700 transition-colors hover:text-[#a09175]"
-					on:click={() => (menuOpen = false)}>Global Impact</a
-				>
-				<a
-					href="/initiatives"
-					class="text-gray-700 transition-colors hover:text-[#a09175]"
-					on:click={() => (menuOpen = false)}>Initiatives</a
-				>
-				<a
-					href="mailto:esperer8@substack.com"
-					class="text-gray-700 transition-colors hover:text-[#a09175]"
-					on:click={() => (menuOpen = false)}>Contact</a
-				>
-
-				<div class="flex w-full flex-col items-center gap-3 pt-4">
+				<!-- Centered Navigation Links -->
+				<div class="flex flex-col items-center space-y-4 px-4">
 					<a
-						href="/join"
-						class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#a09175] hover:text-white focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+						href="/about"
+						class="text-center text-gray-700 transition-colors hover:text-[#a09175]"
 						on:click={() => (menuOpen = false)}
 					>
-						Get Involved
+						About
+					</a>
+					<a
+						href="/global-impact"
+						class="text-center text-gray-700 transition-colors hover:text-[#a09175]"
+						on:click={() => (menuOpen = false)}
+					>
+						Global Impact
+					</a>
+					<a
+						href="/initiatives"
+						class="text-center text-gray-700 transition-colors hover:text-[#a09175]"
+						on:click={() => (menuOpen = false)}
+					>
+						Initiatives
+					</a>
+					<a
+						href="mailto:esperer8@substack.com"
+						class="text-center text-gray-700 transition-colors hover:text-[#a09175]"
+						on:click={() => (menuOpen = false)}
+					>
+						Contact
 					</a>
 
-					{#if !$user}
+					<!-- Centered Action Buttons -->
+					<div class="flex w-full flex-col items-center gap-3 pt-4">
+						<a
+							href="/join"
+							class="w-full max-w-[200px] rounded-lg border border-[#a09175] bg-white px-6 py-2 text-center text-sm text-black transition-colors hover:bg-[#a09175] hover:text-white focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+							on:click={() => (menuOpen = false)}
+						>
+							Get Involved
+						</a>
+
 						<button
 							on:click={() => {
 								handleLogin();
 								menuOpen = false;
 							}}
-							class="rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
+							class="w-full max-w-[200px] rounded-lg border border-[#a09175] bg-white px-6 py-2 text-sm text-black transition-colors hover:bg-[#f5e4d7] hover:text-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c] focus:outline-none"
 						>
 							Login
 						</button>
-					{/if}
+					</div>
 				</div>
 			</div>
 		{/if}
