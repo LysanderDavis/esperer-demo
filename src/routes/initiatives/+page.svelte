@@ -17,10 +17,9 @@
 		},
 		{
 			id: 2,
-			title: 'EcoTrack',
+			title: 'Coming Soon...',
 			description:
-				'Monitor your daily environmental impact and make greener choices. Join the movement toward sustainable living.',
-			image: '/images/eco-track-banner.jpg',
+				'Be Hyped!',
 			cta: 'Explore',
 			link: '/eco-track',
 			category: 'Environmental'
