@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/supabaseClient.js';
 
-	// BMI calculation function
 	function calculateBMI(weight: number, height: number) {
 		const bmi = weight / (height * height);
 		let category = '';
@@ -11,16 +10,16 @@
 
 		if (bmi < 18.5) {
 			category = 'Underweight';
-			color = 'text-blue-600';
+			color = 'text-[#9d5d2c]';
 		} else if (bmi < 25) {
 			category = 'Normal';
-			color = 'text-green-600';
+			color = 'text-[#9d5d2c]';
 		} else if (bmi < 30) {
 			category = 'Overweight';
-			color = 'text-yellow-600';
+			color = 'text-[#9d5d2c]';
 		} else {
 			category = 'Obese';
-			color = 'text-red-600';
+			color = 'text-[#9d5d2c]';
 		}
 
 		return {
@@ -42,7 +41,6 @@
 		} = await supabase.auth.getUser();
 		user = currentUser;
 
-		// Load previous data if available
 		if (user) {
 			const { data } = await supabase
 				.from('statisty_metrics')
@@ -66,7 +64,6 @@
 		try {
 			result = calculateBMI(weight, height);
 
-			// Save to database if user is logged in
 			if (user) {
 				await supabase.from('statisty_metrics').insert({
 					user_id: user.id,
@@ -86,7 +83,6 @@
 		}
 	}
 
-	// Auto-calculate when values change
 	$: if (weight > 0 && height > 0) {
 		result = calculateBMI(weight, height);
 	}
@@ -100,11 +96,11 @@
 
 	<div class="space-y-4">
 		<div>
-			<label class="mb-2 block text-sm font-medium text-gray-700"> Weight (kg) </label>
+			<label for="weight" class="mb-2 block text-sm font-medium text-gray-700"> Weight (kg) </label>
 			<input
 				type="number"
 				bind:value={weight}
-				class="w-full rounded-lg border border-gray-300 p-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+				class="w-full rounded-lg border border-gray-300 p-3 focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
 				min="1"
 				max="500"
 				step="0.1"
@@ -113,11 +109,11 @@
 		</div>
 
 		<div>
-			<label class="mb-2 block text-sm font-medium text-gray-700"> Height (m) </label>
+			<label for="height" class="mb-2 block text-sm font-medium text-gray-700"> Height (m) </label>
 			<input
 				type="number"
 				bind:value={height}
-				class="w-full rounded-lg border border-gray-300 p-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+				class="w-full rounded-lg border border-gray-300 p-3 focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
 				min="0.5"
 				max="3"
 				step="0.01"
@@ -129,7 +125,7 @@
 			<button
 				on:click={handleCalculate}
 				disabled={loading || !weight || !height}
-				class="w-full rounded-lg bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-600 disabled:bg-gray-400"
+				class="w-full rounded-lg bg-[#9d5d2c] px-4 py-3 font-medium text-white transition-colors hover:bg-[#7d4a22] disabled:bg-gray-400"
 			>
 				{loading ? 'Saving...' : 'Save BMI'}
 			</button>
@@ -145,12 +141,11 @@
 						{result.category}
 					</div>
 
-					<!-- BMI Scale Visual -->
 					<div class="space-y-2 text-sm">
 						<div
 							class="flex items-center justify-between rounded p-2 {result.category ===
 							'Underweight'
-								? 'bg-blue-100'
+								? 'bg-[#f4e7df]'
 								: 'bg-gray-100'}"
 						>
 							<span>Underweight</span>
@@ -158,7 +153,7 @@
 						</div>
 						<div
 							class="flex items-center justify-between rounded p-2 {result.category === 'Normal'
-								? 'bg-green-100'
+								? 'bg-[#f4e7df]'
 								: 'bg-gray-100'}"
 						>
 							<span>Normal</span>
@@ -166,7 +161,7 @@
 						</div>
 						<div
 							class="flex items-center justify-between rounded p-2 {result.category === 'Overweight'
-								? 'bg-yellow-100'
+								? 'bg-[#f4e7df]'
 								: 'bg-gray-100'}"
 						>
 							<span>Overweight</span>
@@ -174,7 +169,7 @@
 						</div>
 						<div
 							class="flex items-center justify-between rounded p-2 {result.category === 'Obese'
-								? 'bg-red-100'
+								? 'bg-[#f4e7df]'
 								: 'bg-gray-100'}"
 						>
 							<span>Obese</span>

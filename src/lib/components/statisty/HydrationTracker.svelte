@@ -251,7 +251,7 @@
 
 		<!-- Daily Goal Adjustment -->
 		<div class="border-t pt-4">
-			<label class="mb-2 block text-sm font-medium text-gray-700"> Daily Goal (ml) </label>
+			<label for="dailyGoal" class="mb-2 block text-sm font-medium text-gray-700"> Daily Goal (ml) </label>
 			<input
 				type="number"
 				bind:value={dailyGoal}

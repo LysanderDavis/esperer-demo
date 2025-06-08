@@ -168,7 +168,7 @@
 		<!-- Sleep Input Form -->
 		<div class="grid grid-cols-1 gap-4">
 			<div>
-				<label class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Bedtime </label>
+				<label for="bedTime" class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Bedtime </label>
 				<input
 					type="time"
 					bind:value={bedtime}
@@ -177,7 +177,7 @@
 			</div>
 
 			<div>
-				<label class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Wake Time </label>
+				<label for="wakeTime" class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Wake Time </label>
 				<input
 					type="time"
 					bind:value={wakeTime}
@@ -186,7 +186,7 @@
 			</div>
 
 			<div>
-				<label class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Sleep Quality (1-10) </label>
+				<label for="sleepQuality" class="mb-2 block text-sm font-medium text-[#9d5d2c]"> Sleep Quality (1-10) </label>
 				<input
 					type="range"
 					bind:value={quality}
