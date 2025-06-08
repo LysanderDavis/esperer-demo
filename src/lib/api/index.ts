@@ -1,158 +1,174 @@
 // src/lib/api/index.ts
 import type { SupabaseClient } from '@supabase/supabase-js';
+import type { CarbonFootprintData, CarbonInputs } from './statisty/carbon.js';
+import { calculateCarbonFootprint, validateCarbonInputs } from './statisty/carbon.js';
 
-export * from './statisty/bmi.js';
-export * from './statisty/sleep.js';
-export * from './statisty/hydration.js';
-export * from './statisty/nutrition.js';
-export * from './statisty/carbon.js';
-export * from './statisty/air.js';
+export interface StatistyMetric {
+	id: string;
+	user_id: string;
+	metric: string;
+	data: any;
+	created_at: string;
+	updated_at: string;
+}
 
-// Base API client for Statisty metrics
 export class StatistyAPI {
 	constructor(private supabase: SupabaseClient) {}
 
-	async saveMetric(userId: string, metric: string, data: any) {
+	async saveMetric(userId: string, metric: string, data: any): Promise<StatistyMetric | null> {
 		try {
-			const { data: result, error } = await this.supabase.from('statisty_metrics').insert({
-				user_id: userId,
-				metric,
-				data,
-				created_at: new Date().toISOString()
-			});
+			const { data: result, error } = await this.supabase
+				.from('statisty_metrics')
+				.insert({
+					user_id: userId,
+					metric,
+					data
+				})
+				.select()
+				.single();
 
-			if (error) {
-				console.error('Error saving metric:', error);
-				throw error;
-			}
-
+			if (error) throw error;
 			return result;
 		} catch (error) {
-			console.error('Failed to save metric:', error);
+			console.error('Error saving metric:', error);
 			throw error;
 		}
 	}
 
-	async getMetrics(userId: string, metric?: string, limit: number = 50) {
+	async getMetrics(userId: string, metric: string, limit?: number): Promise<StatistyMetric[]> {
 		try {
 			let query = this.supabase
 				.from('statisty_metrics')
 				.select('*')
 				.eq('user_id', userId)
-				.order('created_at', { ascending: false })
-				.limit(limit);
+				.eq('metric', metric)
+				.order('created_at', { ascending: false });
 
-			if (metric) {
-				query = query.eq('metric', metric);
+			if (limit) {
+				query = query.limit(limit);
 			}
 
 			const { data, error } = await query;
-
-			if (error) {
-				console.error('Error fetching metrics:', error);
-				throw error;
-			}
-
+			if (error) throw error;
 			return data || [];
 		} catch (error) {
-			console.error('Failed to fetch metrics:', error);
+			console.error('Error getting metrics:', error);
 			throw error;
 		}
 	}
 
-	async getLatestMetric(userId: string, metric: string) {
+	async getWeeklyMetrics(userId: string, metric: string): Promise<StatistyMetric[]> {
 		try {
+			const weekAgo = new Date();
+			weekAgo.setDate(weekAgo.getDate() - 7);
+
 			const { data, error } = await this.supabase
 				.from('statisty_metrics')
 				.select('*')
 				.eq('user_id', userId)
 				.eq('metric', metric)
+				.gte('created_at', weekAgo.toISOString())
+				.order('created_at', { ascending: false });
+
+			if (error) throw error;
+			return data || [];
+		} catch (error) {
+			console.error('Error getting weekly metrics:', error);
+			throw error;
+		}
+	}
+
+	async getTodayMetric(userId: string, metric: string): Promise<StatistyMetric | null> {
+		try {
+			const today = new Date();
+			today.setHours(0, 0, 0, 0);
+			const tomorrow = new Date(today);
+			tomorrow.setDate(tomorrow.getDate() + 1);
+
+			const { data, error } = await this.supabase
+				.from('statisty_metrics')
+				.select('*')
+				.eq('user_id', userId)
+				.eq('metric', metric)
+				.gte('created_at', today.toISOString())
+				.lt('created_at', tomorrow.toISOString())
 				.order('created_at', { ascending: false })
 				.limit(1)
 				.single();
 
-			if (error && error.code !== 'PGRST116') {
-				// PGRST116 is "not found"
-				console.error('Error fetching latest metric:', error);
-				throw error;
-			}
-
+			if (error && error.code !== 'PGRST116') throw error; // PGRST116 is "no rows returned"
 			return data;
 		} catch (error) {
-			console.error('Failed to fetch latest metric:', error);
-			throw error;
+			console.error('Error getting today metric:', error);
+			return null;
 		}
 	}
 
-	async deleteMetric(userId: string, metricId: string) {
-		try {
-			const { error } = await this.supabase
-				.from('statisty_metrics')
-				.delete()
-				.eq('user_id', userId)
-				.eq('id', metricId);
-
-			if (error) {
-				console.error('Error deleting metric:', error);
-				throw error;
-			}
-
-			return true;
-		} catch (error) {
-			console.error('Failed to delete metric:', error);
-			throw error;
+	// Carbon-specific methods
+	async saveCarbonData(
+		userId: string,
+		inputs: CarbonInputs
+	): Promise<{ carbonData: CarbonFootprintData; saved: StatistyMetric | null }> {
+		// Validate inputs
+		const errors = validateCarbonInputs(inputs);
+		if (errors.length > 0) {
+			throw new Error(`Invalid inputs: ${errors.join(', ')}`);
 		}
+
+		// Calculate carbon footprint
+		const carbonData = calculateCarbonFootprint(inputs);
+
+		// Save to database
+		const saved = await this.saveMetric(userId, 'carbon', {
+			...carbonData,
+			inputs
+		});
+
+		return { carbonData, saved };
 	}
 
-	async updateMetric(userId: string, metricId: string, data: any) {
-		try {
-			const { data: result, error } = await this.supabase
-				.from('statisty_metrics')
-				.update({
-					data,
-					updated_at: new Date().toISOString()
-				})
-				.eq('user_id', userId)
-				.eq('id', metricId);
-
-			if (error) {
-				console.error('Error updating metric:', error);
-				throw error;
-			}
-
-			return result;
-		} catch (error) {
-			console.error('Failed to update metric:', error);
-			throw error;
-		}
+	async getCarbonData(userId: string, limit?: number): Promise<CarbonFootprintData[]> {
+		const metrics = await this.getMetrics(userId, 'carbon', limit);
+		return metrics.map((metric) => ({
+			transport: metric.data.transport,
+			energy: metric.data.energy,
+			food: metric.data.food,
+			total: metric.data.total,
+			category: metric.data.category,
+			date: new Date(metric.created_at).toLocaleDateString()
+		}));
 	}
 
-	// Utility method to get metrics for a specific date range
-	async getMetricsByDateRange(userId: string, metric: string, startDate: string, endDate: string) {
-		try {
-			const { data, error } = await this.supabase
-				.from('statisty_metrics')
-				.select('*')
-				.eq('user_id', userId)
-				.eq('metric', metric)
-				.gte('created_at', startDate)
-				.lte('created_at', endDate)
-				.order('created_at', { ascending: true });
+	async getWeeklyCarbonData(userId: string): Promise<CarbonFootprintData[]> {
+		const metrics = await this.getWeeklyMetrics(userId, 'carbon');
+		return metrics.map((metric) => ({
+			transport: metric.data.transport,
+			energy: metric.data.energy,
+			food: metric.data.food,
+			total: metric.data.total,
+			category: metric.data.category,
+			date: new Date(metric.created_at).toLocaleDateString()
+		}));
+	}
 
-			if (error) {
-				console.error('Error fetching metrics by date range:', error);
-				throw error;
-			}
+	async getTodayCarbonData(userId: string): Promise<CarbonFootprintData | null> {
+		const metric = await this.getTodayMetric(userId, 'carbon');
+		if (!metric) return null;
 
-			return data || [];
-		} catch (error) {
-			console.error('Failed to fetch metrics by date range:', error);
-			throw error;
-		}
+		return {
+			transport: metric.data.transport,
+			energy: metric.data.energy,
+			food: metric.data.food,
+			total: metric.data.total,
+			category: metric.data.category,
+			date: new Date(metric.created_at).toLocaleDateString()
+		};
 	}
 }
 
-// Helper function to create StatistyAPI instance
 export function createStatistyAPI(supabase: SupabaseClient): StatistyAPI {
 	return new StatistyAPI(supabase);
 }
+
+// Re-export from carbon module
+export * from './statisty/carbon.js';
