@@ -77,7 +77,6 @@
 			await loadHistoricalData();
 
 			// Show success message briefly
-			const successMsg = error;
 			error = 'Data saved successfully!';
 			setTimeout(() => {
 				if (error === 'Data saved successfully!') error = '';
@@ -118,261 +117,235 @@
 	];
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6 p-6">
+<div class="h-full rounded-xl bg-white p-6 shadow-lg">
 	<!-- Header -->
-	<div class="rounded-lg border border-[#9d5d2c]/20 bg-white p-6 shadow-md">
-		<div class="mb-4 flex items-center justify-between">
-			<div class="flex items-center">
-				<div class="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#9d5d2c]/10">
-					<span class="text-2xl">🌱</span>
+	<div class="mb-4 flex items-center justify-between">
+		<div class="flex items-center">
+			<span class="mr-2 text-2xl">🌱</span>
+			<h3 class="text-xl font-semibold text-gray-800">Carbon Footprint Calculator</h3>
+		</div>
+		<div class="flex space-x-2">
+			<button
+				on:click={() => (showTips = !showTips)}
+				class="text-sm text-green-600 hover:text-green-700"
+				title="Toggle tips"
+			>
+				💡 Tips
+			</button>
+			<button
+				on:click={resetForm}
+				class="text-sm text-red-500 hover:text-red-600"
+				title="Reset form"
+			>
+				🔄 Reset
+			</button>
+		</div>
+	</div>
+
+	<!-- Current Calculation Display -->
+	{#if currentCalculation}
+		<div class="mb-6 rounded-lg bg-gray-50 p-4">
+			<div class="mb-3 text-center">
+				<div class="text-3xl font-bold text-gray-800">
+					{currentCalculation.total} kg CO₂
 				</div>
-				<div>
-					<h2 class="text-2xl font-bold text-[#9d5d2c]">Carbon Footprint Calculator</h2>
-					<p class="text-gray-600">Track your daily environmental impact</p>
+				<div class="text-sm text-gray-600">Today's Footprint</div>
+			</div>
+
+			<div class="mb-3 grid grid-cols-3 gap-2 text-center text-sm">
+				<div class="rounded bg-blue-100 p-2">
+					<div class="font-medium text-blue-600">{currentCalculation.transport}kg</div>
+					<div class="text-blue-500">Transport</div>
+				</div>
+				<div class="rounded bg-yellow-100 p-2">
+					<div class="font-medium text-yellow-600">{currentCalculation.energy}kg</div>
+					<div class="text-yellow-500">Energy</div>
+				</div>
+				<div class="rounded bg-green-100 p-2">
+					<div class="font-medium text-green-600">{currentCalculation.food}kg</div>
+					<div class="text-green-500">Food</div>
 				</div>
 			</div>
-			<div class="flex gap-3">
-				<button
-					on:click={() => (showTips = !showTips)}
-					class="rounded-lg bg-green-500 px-4 py-2 text-white transition-colors hover:bg-green-600"
+
+			<div class="flex items-center justify-between">
+				<span
+					class="rounded-full px-3 py-1 text-sm font-medium text-white {getCategoryColor(
+						currentCalculation.category
+					)}"
 				>
-					{showTips ? 'Hide' : 'Show'} Tips
-				</button>
+					{currentCalculation.category}
+				</span>
 				<button
-					on:click={resetForm}
-					class="rounded-lg bg-[#9d5d2c] px-4 py-2 text-white transition-colors hover:bg-[#8a4f24]"
+					on:click={saveCalculation}
+					disabled={saving}
+					class="rounded-lg bg-[#9d5d2c] px-4 py-2 text-sm text-white transition-colors hover:bg-[#8a4f24] disabled:opacity-50"
 				>
-					Reset
+					{saving ? 'Saving...' : 'Save Data'}
 				</button>
 			</div>
 		</div>
+	{/if}
 
-		<!-- Current Calculation Display -->
-		{#if currentCalculation}
-			<div
-				class="mb-4 rounded-lg border border-[#9d5d2c]/20 bg-gradient-to-br from-[#9d5d2c]/5 to-[#9d5d2c]/10 p-5"
-			>
-				<div class="mb-4 flex items-center justify-between">
-					<h3 class="text-lg font-semibold text-[#9d5d2c]">Today's Footprint</h3>
-					<span class="text-3xl font-bold text-[#9d5d2c]">{currentCalculation.total} kg CO₂</span>
-				</div>
-
-				<div class="mb-4 grid grid-cols-3 gap-4">
-					<div class="rounded-lg bg-white/50 p-3 text-center">
-						<div class="text-sm font-medium text-gray-600">Transport</div>
-						<div class="text-xl font-bold text-blue-600">{currentCalculation.transport} kg</div>
-					</div>
-					<div class="rounded-lg bg-white/50 p-3 text-center">
-						<div class="text-sm font-medium text-gray-600">Energy</div>
-						<div class="text-xl font-bold text-yellow-600">{currentCalculation.energy} kg</div>
-					</div>
-					<div class="rounded-lg bg-white/50 p-3 text-center">
-						<div class="text-sm font-medium text-gray-600">Food</div>
-						<div class="text-xl font-bold text-green-600">{currentCalculation.food} kg</div>
-					</div>
-				</div>
-
-				<div class="flex items-center justify-between">
-					<span
-						class="rounded-full px-4 py-2 text-sm font-medium text-white {getCategoryColor(
-							currentCalculation.category
-						)}"
-					>
-						{currentCalculation.category}
-					</span>
-					<button
-						on:click={saveCalculation}
-						disabled={saving}
-						class="rounded-lg bg-[#9d5d2c] px-6 py-2 text-white transition-colors hover:bg-[#8a4f24] disabled:opacity-50"
-					>
-						{saving ? 'Saving...' : 'Save Data'}
-					</button>
-				</div>
-			</div>
-		{/if}
-
-		<!-- Error/Success Messages -->
-		{#if error}
-			<div
-				class="mb-4 rounded-lg border p-4 {error.includes('success')
-					? 'border-green-200 bg-green-50 text-green-700'
-					: 'border-red-200 bg-red-50 text-red-700'}"
-			>
-				{error}
-			</div>
-		{/if}
-	</div>
+	<!-- Error/Success Messages -->
+	{#if error}
+		<div
+			class="mb-4 rounded-lg p-3 text-sm {error.includes('success')
+				? 'bg-green-50 text-green-700'
+				: 'bg-red-50 text-red-700'}"
+		>
+			{error}
+		</div>
+	{/if}
 
 	<!-- Input Tabs -->
-	<div class="overflow-hidden rounded-lg border border-[#9d5d2c]/20 bg-white shadow-md">
+	<div class="mb-6">
 		<!-- Tab Headers -->
-		<div class="flex border-b border-[#9d5d2c]/20">
+		<div class="mb-4 flex rounded-lg bg-gray-100 p-1">
 			{#each tabs as tab}
 				<button
 					on:click={() => (activeTab = tab.id)}
-					class="flex-1 px-6 py-4 text-center font-medium transition-colors {activeTab === tab.id
-						? 'bg-[#9d5d2c] text-white'
-						: 'bg-gray-50 text-gray-700 hover:bg-[#9d5d2c]/10'}"
+					class="flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors {activeTab ===
+					tab.id
+						? 'bg-white text-gray-900 shadow-sm'
+						: 'text-gray-600 hover:text-gray-900'}"
 				>
-					<span class="mr-2 text-lg">{tab.icon}</span>
+					<span class="mr-1">{tab.icon}</span>
 					{tab.label}
 				</button>
 			{/each}
 		</div>
 
 		<!-- Tab Content -->
-		<div class="p-6">
+		<div class="space-y-4">
 			{#if activeTab === 'transport'}
-				<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+				<div class="grid grid-cols-2 gap-3">
 					<div>
-						<label for="car" class="mb-2 block text-sm font-medium text-gray-700">Car (km)</label>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Car (km)</label>
 						<input
 							type="number"
 							bind:value={inputs.carKm}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily car distance"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="publicTransport" class="mb-2 block text-sm font-medium text-gray-700"
-							>Public Transport (km)</label
+						<label class="mb-1 block text-sm font-medium text-gray-700">Public Transport (km)</label
 						>
 						<input
 							type="number"
 							bind:value={inputs.publicTransportKm}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Bus, train, metro distance"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="cycling" class="mb-2 block text-sm font-medium text-gray-700"
-							>Cycling (km)</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Cycling (km)</label>
 						<input
 							type="number"
 							bind:value={inputs.bikeKm}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Bike distance"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="walking" class="mb-2 block text-sm font-medium text-gray-700"
-							>Walking (km)</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Walking (km)</label>
 						<input
 							type="number"
 							bind:value={inputs.walkKm}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Walking distance"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 				</div>
 			{:else if activeTab === 'energy'}
-				<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+				<div class="grid grid-cols-2 gap-3">
 					<div>
-						<label for="electricity" class="mb-2 block text-sm font-medium text-gray-700"
-							>Electricity (kWh)</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Electricity (kWh)</label>
 						<input
 							type="number"
 							bind:value={inputs.electricityKwh}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily electricity usage"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="gasUsage" class="mb-2 block text-sm font-medium text-gray-700"
-							>Gas Usage (m³)</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Gas Usage (m³)</label>
 						<input
 							type="number"
 							bind:value={inputs.gasUsage}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily gas consumption"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
-					<div class="md:col-span-2">
-						<label for="heating-cooling" class="mb-2 block text-sm font-medium text-gray-700"
-							>Heating/Cooling (kWh)</label
+					<div class="col-span-2">
+						<label class="mb-1 block text-sm font-medium text-gray-700">Heating/Cooling (kWh)</label
 						>
 						<input
 							type="number"
 							bind:value={inputs.heatingUsage}
 							min="0"
 							step="0.1"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily heating/cooling usage"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 				</div>
 			{:else if activeTab === 'food'}
-				<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+				<div class="grid grid-cols-2 gap-3">
 					<div>
-						<label for="meatServings" class="mb-2 block text-sm font-medium text-gray-700"
-							>Meat Servings</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Meat Servings</label>
 						<input
-							id="meatServings"
 							type="number"
 							bind:value={inputs.meatServings}
 							min="0"
 							step="0.5"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily meat servings"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="dairyServings" class="mb-2 block text-sm font-medium text-gray-700"
-							>Dairy Servings</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Dairy Servings</label>
 						<input
-							id="dairyServings"
 							type="number"
 							bind:value={inputs.dairyServings}
 							min="0"
 							step="0.5"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily dairy servings"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="vegetableServings" class="mb-2 block text-sm font-medium text-gray-700"
-							>Vegetable Servings</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Vegetable Servings</label>
 						<input
-							id="vegetableServings"
 							type="number"
 							bind:value={inputs.vegetableServings}
 							min="0"
 							step="0.5"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily vegetable servings"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 					<div>
-						<label for="fishServings" class="mb-2 block text-sm font-medium text-gray-700"
-							>Fish Servings</label
-						>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Fish Servings</label>
 						<input
-							id="fishServings"
 							type="number"
 							bind:value={inputs.fishServings}
 							min="0"
 							step="0.5"
-							class="w-full rounded-lg border border-gray-300 p-3 transition-colors focus:border-[#9d5d2c] focus:ring-2 focus:ring-[#9d5d2c]/20"
-							placeholder="Daily fish servings"
+							class="w-full rounded-lg border border-gray-300 p-2 text-sm focus:border-transparent focus:ring-2 focus:ring-[#9d5d2c]"
+							placeholder="0"
 						/>
 					</div>
 				</div>
@@ -382,41 +355,28 @@
 
 	<!-- Historical Data -->
 	{#if historicalData.length > 0}
-		<div class="rounded-lg border border-[#9d5d2c]/20 bg-white p-6 shadow-md">
-			<h3 class="mb-4 text-lg font-semibold text-[#9d5d2c]">Recent History</h3>
-			<div class="space-y-3">
-				{#each historicalData as data}
-					<div
-						class="flex items-center justify-between rounded-lg border border-[#9d5d2c]/20 bg-gradient-to-r from-[#9d5d2c]/5 to-[#9d5d2c]/10 p-4"
-					>
-						<div class="flex items-center space-x-4">
-							<div class="text-sm font-medium text-gray-700">{data.date}</div>
+		<div class="mb-4 border-t pt-4">
+			<h4 class="mb-3 font-medium text-gray-800">Recent History</h4>
+			<div class="max-h-32 space-y-2 overflow-y-auto">
+				{#each historicalData.slice(0, 3) as data}
+					<div class="flex items-center justify-between rounded bg-gray-50 p-2 text-sm">
+						<div class="flex items-center space-x-2">
+							<span class="text-xs text-gray-500">{data.date}</span>
 							<span
-								class="rounded-full px-3 py-1 text-xs font-medium text-white {getCategoryColor(
+								class="rounded px-2 py-1 text-xs font-medium text-white {getCategoryColor(
 									data.category
 								)}"
 							>
 								{data.category}
 							</span>
 						</div>
-						<div class="flex items-center space-x-6">
-							<div class="text-sm font-medium">
-								<span class="text-blue-600">T: {data.transport}</span>
-								<span class="ml-3 text-yellow-600">E: {data.energy}</span>
-								<span class="ml-3 text-green-600">F: {data.food}</span>
-							</div>
-							<div class="text-lg font-bold text-[#9d5d2c]">{data.total} kg CO₂</div>
-						</div>
+						<div class="font-medium text-gray-800">{data.total} kg CO₂</div>
 					</div>
 				{/each}
 			</div>
-
 			{#if historicalData.length > 1}
-				<div class="mt-4 rounded-lg border border-[#9d5d2c]/20 bg-[#9d5d2c]/10 p-4">
-					<div class="text-sm text-gray-700">
-						7-day average:
-						<span class="font-bold text-[#9d5d2c]">{getAverageEmissions().toFixed(2)} kg CO₂</span>
-					</div>
+				<div class="mt-2 text-xs text-gray-600">
+					7-day average: <span class="font-medium">{getAverageEmissions().toFixed(2)} kg CO₂</span>
 				</div>
 			{/if}
 		</div>
@@ -424,21 +384,17 @@
 
 	<!-- Carbon Reduction Tips -->
 	{#if showTips}
-		<div class="rounded-lg border border-[#9d5d2c]/20 bg-white p-6 shadow-md">
-			<h3 class="mb-6 text-lg font-semibold text-[#9d5d2c]">💡 Carbon Reduction Tips</h3>
-			<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-				{#each carbonTips as tip}
-					<div
-						class="rounded-lg border border-[#9d5d2c]/20 p-5 transition-all hover:bg-[#9d5d2c]/5 hover:shadow-md"
-					>
-						<div class="flex items-start space-x-4">
-							<span class="text-2xl">{tip.icon}</span>
+		<div class="border-t pt-4">
+			<h4 class="mb-3 font-medium text-gray-800">💡 Quick Tips</h4>
+			<div class="max-h-40 space-y-2 overflow-y-auto">
+				{#each carbonTips.slice(0, 3) as tip}
+					<div class="rounded bg-green-50 p-3 text-sm">
+						<div class="flex items-start space-x-2">
+							<span class="text-lg">{tip.icon}</span>
 							<div>
-								<h4 class="mb-2 font-semibold text-[#9d5d2c]">{tip.title}</h4>
-								<p class="mb-3 text-sm text-gray-600">{tip.description}</p>
-								<p class="rounded bg-green-50 px-2 py-1 text-xs font-medium text-green-600">
-									{tip.impact}
-								</p>
+								<div class="font-medium text-green-800">{tip.title}</div>
+								<div class="text-green-600">{tip.description}</div>
+								<div class="mt-1 text-xs font-medium text-green-500">{tip.impact}</div>
 							</div>
 						</div>
 					</div>

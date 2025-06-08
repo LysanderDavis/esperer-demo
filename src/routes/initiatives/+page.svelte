@@ -54,7 +54,7 @@
 		{#if mounted}
 			<div in:fade={{ duration: 800, delay: 200 }}>
 				<h1 class="mb-6 text-4xl font-bold text-[#9d5d2c] sm:text-5xl lg:text-6xl">
-					Our <span class="text-[#7c451f]">Incentives</span>
+					Our Incentives
 				</h1>
 				<p class="mx-auto max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
 					Discover meaningful projects designed to create positive change. Each initiative empowers
