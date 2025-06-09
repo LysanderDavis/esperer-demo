@@ -74,7 +74,10 @@
 	});
 </script>
 
-<header class="fixed top-0 right-0 left-0 z-50 border-b border-[#111111ae] bg-white shadow-md">
+<header
+	class="fixed top-0 right-0 left-0 z-50 border-b border-[#111111ae] bg-white shadow-md"
+	style="--header-height: 88px;"
+>
 	<div class="w-full bg-[#9d5d2c]">
 		<div class="flex items-center justify-between px-6 py-4 sm:px-12 lg:px-24">
 			<a

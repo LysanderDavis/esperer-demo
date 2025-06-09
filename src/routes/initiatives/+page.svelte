@@ -17,12 +17,12 @@
 		},
 		{
 			id: 2,
-			title: 'Coming Soon...',
-			description:
-				'Be Hyped!',
+			title: 'RecycleNearMe',
+			description: 'Find recycling centers around you, and make the recycling process easier, more accessible, and fun for everyone!',
+			image: '/recycle-near-me-banner.png',
 			cta: 'Explore',
-			link: '/eco-track',
-			category: 'Environmental'
+			link: '/recycle-near-me',
+			category: 'Environmental & Sustainability'
 		}
 	];
 
@@ -46,10 +46,7 @@
 <section
 	class="relative overflow-hidden bg-gradient-to-br from-[#f8f4f0] via-white to-[#f5ede4] pt-32 pb-12"
 >
-	<div
-		class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5ZDVkMmMiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iNCIvPjwvZz48L2c+PC9zdmc+')] opacity-40"
-	></div>
-
+	<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,...')] opacity-40"></div>
 	<div class="relative mx-auto max-w-7xl px-6 text-center sm:px-12 lg:px-24">
 		{#if mounted}
 			<div in:fade={{ duration: 800, delay: 200 }}>
@@ -82,7 +79,8 @@
 						<!-- Category Badge -->
 						<div class="absolute top-4 left-4 z-10">
 							<span
-								class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[#9d5d2c] shadow-md backdrop-blur-sm"
+								class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow-md backdrop-blur-sm
+								{index === 1 ? 'text-green-700' : 'text-[#9d5d2c]'}"
 							>
 								{project.category}
 							</span>
@@ -90,7 +88,11 @@
 
 						<!-- Project Image -->
 						<div
-							class="relative h-56 overflow-hidden bg-gradient-to-br from-[#9d5d2c]/10 to-[#7c451f]/20"
+							class={`relative h-56 overflow-hidden ${
+								index === 1
+									? 'bg-gradient-to-br from-green-100 to-green-200'
+									: 'bg-gradient-to-br from-[#9d5d2c]/10 to-[#7c451f]/20'
+							}`}
 						>
 							<img
 								src={project.image}
@@ -98,11 +100,8 @@
 								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
 								loading="lazy"
 								on:error={(e) => {
-									// Fallback gradient if image fails to load
 									const target = e.target as HTMLImageElement;
-									if (target) {
-										target.style.display = 'none';
-									}
+									if (target) target.style.display = 'none';
 								}}
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -111,7 +110,11 @@
 						<!-- Content -->
 						<div class="p-6">
 							<h2
-								class="mb-3 text-2xl font-bold text-[#9d5d2c] transition-colors duration-300 group-hover:text-[#7c451f]"
+								class={`mb-3 text-2xl font-bold transition-colors duration-300 ${
+									index === 1
+										? 'text-green-700 group-hover:text-green-800'
+										: 'text-[#9d5d2c] group-hover:text-[#7c451f]'
+								}`}
 							>
 								{project.title}
 							</h2>
@@ -122,7 +125,11 @@
 							<!-- Call to Action -->
 							<a
 								href={project.link}
-								class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#9d5d2c] to-[#b96b30] px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 group-hover:scale-105 hover:from-[#7c451f] hover:to-[#9d5d2c] hover:shadow-xl focus:ring-4 focus:ring-[#9d5d2c]/30 focus:outline-none"
+								class={`inline-flex w-full items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 group-hover:scale-105 focus:ring-4 focus:outline-none ${
+									index === 1
+										? 'bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 focus:ring-green-300'
+										: 'bg-gradient-to-r from-[#9d5d2c] to-[#b96b30] hover:from-[#7c451f] hover:to-[#9d5d2c] focus:ring-[#9d5d2c]/30'
+								}`}
 							>
 								{project.cta}
 								<svg
@@ -136,14 +143,18 @@
 										stroke-linejoin="round"
 										stroke-width="2"
 										d="M17 8l4 4m0 0l-4 4m4-4H3"
-									></path>
+									/>
 								</svg>
 							</a>
 						</div>
 
 						<!-- Decorative Border -->
 						<div
-							class="pointer-events-none absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-[#9d5d2c]/20 via-transparent to-[#b96b30]/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+							class={`pointer-events-none absolute inset-0 rounded-2xl border-2 border-transparent transition-opacity duration-300 group-hover:opacity-100 ${
+								index === 1
+									? 'bg-gradient-to-r from-green-500/20 via-transparent to-green-300/20'
+									: 'bg-gradient-to-r from-[#9d5d2c]/20 via-transparent to-[#b96b30]/20'
+							}`}
 						></div>
 					</div>
 				{/if}
@@ -170,7 +181,7 @@
 								stroke-linejoin="round"
 								stroke-width="2"
 								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-							></path>
+							/>
 						</svg>
 					</div>
 				</div>
@@ -205,7 +216,7 @@
 								stroke-linejoin="round"
 								stroke-width="2"
 								d="M13 7l5 5m0 0l-5 5m5-5H6"
-							></path>
+							/>
 						</svg>
 					</a>
 					<a
