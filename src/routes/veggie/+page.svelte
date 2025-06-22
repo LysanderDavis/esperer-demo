@@ -31,6 +31,18 @@
 	function toggleViewMode() {
 		viewMode = viewMode === 'grid' ? 'list' : 'grid';
 	}
+
+	function handleModalClick(event: MouseEvent) {
+		if (event.target === event.currentTarget) {
+			veggieActions.selectVenue(null);
+		}
+	}
+
+	function handleModalKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape') {
+			veggieActions.selectVenue(null);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -43,8 +55,8 @@
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50">
-	<!-- Header -->
-	<header class="relative z-50 bg-white shadow-sm">
+	<!-- Header - Fixed positioning with proper z-index -->
+	<header class="sticky top-0 z-50 bg-white shadow-sm">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
@@ -67,10 +79,13 @@
 		</div>
 	</header>
 
-	<main class="relative z-10 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+	<!-- Main content with proper spacing to account for fixed header -->
+	<main class="relative z-10 mx-auto max-w-7xl px-4 pt-6 pb-6 sm:px-6 lg:px-8">
 		<!-- Search and Filters -->
-		<VeggieSearch />
-		<VeggieFilter />
+		<div class="relative z-30">
+			<VeggieSearch />
+			<VeggieFilter />
+		</div>
 
 		<!-- Location Permission Notice -->
 		{#if $locationPermission === 'denied'}
@@ -212,32 +227,35 @@
 				{/if}
 			</div>
 		</div>
+	</main>
 
-		<!-- Selected Venue Details Modal -->
-		{#if $selectedVenue}
+	<!-- Selected Venue Details Modal -->
+	{#if $selectedVenue}
+		<!-- Modal backdrop with highest z-index -->
+		<div
+			class="bg-opacity-50 fixed inset-0 z-[9999] flex items-center justify-center bg-black p-4"
+			on:click={handleModalClick}
+			on:keydown={handleModalKeydown}
+			role="dialog"
+			aria-modal="true"
+			tabindex="-1"
+		>
+			<!-- Modal content -->
 			<div
-				class="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black"
-				on:click={({ target, currentTarget }) => {
-					if (target === currentTarget) veggieActions.selectVenue(null);
-				}}
-				on:keydown={(e) => {
-					if (e.key === 'Escape') veggieActions.selectVenue(null);
-				}}
-				role="dialog"
-				aria-modal="true"
-				tabindex="-1"
+				class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white shadow-xl"
+				role="document"
 			>
-				<div
-					class="relative z-60 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 shadow-xl"
-				>
-					<div class="mb-4 flex items-start justify-between">
-						<div>
-							<h2 class="text-2xl font-bold text-gray-900">{$selectedVenue.name}</h2>
-							<p class="text-gray-600">{$selectedVenue.address}</p>
+				<!-- Modal header -->
+				<div class="sticky top-0 z-10 border-b border-gray-200 bg-white p-6">
+					<div class="flex items-start justify-between">
+						<div class="min-w-0 flex-1">
+							<h2 class="truncate text-2xl font-bold text-gray-900">{$selectedVenue.name}</h2>
+							<p class="truncate text-gray-600">{$selectedVenue.address}</p>
 						</div>
 						<button
-							class="text-gray-400 hover:text-gray-600"
+							class="ml-4 flex-shrink-0 text-gray-400 transition-colors hover:text-gray-600"
 							on:click={() => veggieActions.selectVenue(null)}
+							aria-label="Close modal"
 						>
 							<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
@@ -249,12 +267,18 @@
 							</svg>
 						</button>
 					</div>
+				</div>
 
+				<!-- Modal body -->
+				<div class="p-6">
 					<VeggieCard venue={$selectedVenue} compact={false} />
+				</div>
 
-					<div class="mt-4 flex gap-2">
+				<!-- Modal footer -->
+				<div class="sticky bottom-0 border-t border-gray-200 bg-white p-6">
+					<div class="flex gap-2">
 						<button
-							class="flex-1 rounded-lg bg-green-600 px-4 py-2 font-medium text-white transition-colors hover:bg-green-700"
+							class="flex-1 rounded-lg bg-green-600 px-4 py-2 font-medium text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
 							on:click={() => {
 								if ($selectedVenue?.latitude && $selectedVenue?.longitude) {
 									const url = `https://www.openstreetmap.org/directions?from=&to=${$selectedVenue.latitude},${$selectedVenue.longitude}`;
@@ -266,7 +290,7 @@
 						</button>
 						{#if $selectedVenue.phone}
 							<button
-								class="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700"
+								class="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
 								on:click={() => window.open(`tel:${$selectedVenue?.phone}`, '_self')}
 							>
 								Call
@@ -274,7 +298,7 @@
 						{/if}
 						{#if $selectedVenue.website}
 							<button
-								class="rounded-lg bg-gray-600 px-4 py-2 font-medium text-white transition-colors hover:bg-gray-700"
+								class="rounded-lg bg-gray-600 px-4 py-2 font-medium text-white transition-colors hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
 								on:click={() => window.open($selectedVenue?.website, '_blank')}
 							>
 								Website
@@ -283,8 +307,8 @@
 					</div>
 				</div>
 			</div>
-		{/if}
-	</main>
+		</div>
+	{/if}
 
 	<!-- Footer -->
 	<footer class="relative z-10 mt-12 border-t bg-white">
