@@ -25,7 +25,7 @@
 			category: 'Environmental & Sustainability'
 		},
 		{
-			id: 2,
+			id: 3,
 			title: 'Veggie',
 			description: 'Find local vegetarian and vegan restaurants, and make plant-based eating quicker, more fun, and easier for all.',
 			image: '/veggie-banner.png',
