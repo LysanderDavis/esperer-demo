@@ -1,7 +1,12 @@
 <!-- src/lib/components/veggie/VeggieMap.svelte -->
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { filteredVenues, userLocation, selectedVenue, veggieActions } from '$lib/stores/veggie.js';
+	import {
+		filteredVenues,
+		userLocation,
+		selectedVenue,
+		veggieActions
+	} from '$lib/stores/veggie.js';
 	import type { VeggieVenue } from '$lib/types/veggie.js';
 
 	let mapContainer: HTMLDivElement;
@@ -28,16 +33,21 @@
 			const leafletModule = await import('leaflet');
 			L = leafletModule.default;
 
-			// Initialize map
-			map = L.map(mapContainer).setView([41.2995, 69.2401], zoom); // Default to Tashkent
+			// Initialize map with proper z-index
+			map = L.map(mapContainer, {
+				zoomControl: true,
+				attributionControl: true
+			}).setView([41.2995, 69.2401], zoom); // Default to Tashkent
 
 			// Add OpenStreetMap tiles
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				attribution: '© OpenStreetMap contributors'
+				attribution: '© OpenStreetMap contributors',
+				maxZoom: 19
 			}).addTo(map);
 
 			// Set up event listeners
 			map.on('moveend', handleMapMove);
+			map.on('zoomend', handleMapMove);
 
 			// Initialize user location if available
 			if ($userLocation) {
@@ -78,7 +88,7 @@
 		const userIcon = L.divIcon({
 			className: 'user-location-marker',
 			html: `
-        <div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg">
+        <div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg relative">
           <div class="w-full h-full bg-blue-400 rounded-full animate-pulse"></div>
         </div>
       `,
@@ -157,9 +167,9 @@
             <div class="flex text-yellow-400">
               ${'★'.repeat(Math.floor(venue.rating))}${'☆'.repeat(5 - Math.floor(venue.rating))}
             </div>
-            <span class="text-xs text-gray-500">(${venue.review_count})</span>
+            <span class="text-xs text-gray-500">(${venue.review_count || 0})</span>
           </div>
-          <p class="text-xs text-gray-600">${venue.cuisine_type}</p>
+          <p class="text-xs text-gray-600 capitalize">${venue.cuisine_type || 'Various'}</p>
         </div>
       `;
 
@@ -193,15 +203,16 @@
 </script>
 
 <div
-	bind:this={mapContainer}
-	class="w-full overflow-hidden rounded-lg shadow-lg"
-	style="height: {height}"
+	class="relative w-full overflow-hidden rounded-lg shadow-lg"
+	style="height: {height}; z-index: 1;"
 >
-	<!-- Loading overlay -->
-	<div class="flex h-full items-center justify-center bg-gray-100">
-		<div class="text-center">
-			<div class="mx-auto h-8 w-8 animate-spin rounded-full border-b-2 border-green-600"></div>
-			<p class="mt-2 text-gray-600">Loading map...</p>
+	<div bind:this={mapContainer} class="h-full w-full" style="z-index: 1;">
+		<!-- Loading overlay -->
+		<div class="flex h-full items-center justify-center bg-gray-100">
+			<div class="text-center">
+				<div class="mx-auto h-8 w-8 animate-spin rounded-full border-b-2 border-green-600"></div>
+				<p class="mt-2 text-gray-600">Loading map...</p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -209,16 +220,25 @@
 <style>
 	:global(.leaflet-container) {
 		font-family: inherit;
+		z-index: 1 !important;
+	}
+
+	:global(.leaflet-control-container) {
+		z-index: 2 !important;
+	}
+
+	:global(.leaflet-popup) {
+		z-index: 3 !important;
 	}
 
 	:global(.user-location-marker) {
-		background: transparent;
-		border: none;
+		background: transparent !important;
+		border: none !important;
 	}
 
 	:global(.venue-marker) {
-		background: transparent;
-		border: none;
+		background: transparent !important;
+		border: none !important;
 	}
 
 	:global(.leaflet-popup-content-wrapper) {
@@ -227,5 +247,16 @@
 
 	:global(.leaflet-popup-content) {
 		margin: 0;
+		padding: 0;
+	}
+
+	:global(.leaflet-popup-close-button) {
+		color: #6b7280 !important;
+		font-size: 18px !important;
+		padding: 4px 8px !important;
+	}
+
+	:global(.leaflet-popup-close-button:hover) {
+		color: #374151 !important;
 	}
 </style>
