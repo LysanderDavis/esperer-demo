@@ -36,7 +36,8 @@
 			// Initialize map with proper z-index
 			map = L.map(mapContainer, {
 				zoomControl: true,
-				attributionControl: true
+				attributionControl: true,
+				zIndex: 1
 			}).setView([41.2995, 69.2401], zoom); // Default to Tashkent
 
 			// Add OpenStreetMap tiles
@@ -119,7 +120,7 @@
 				className: 'venue-marker',
 				html: `
           <div class="relative">
-            <div class="w-6 h-6 rounded-full border-2 border-white shadow-lg transition-all duration-200 ${
+            <div class="w-6 h-6 rounded-full border-2 border-white shadow-lg transition-all duration-200 cursor-pointer ${
 							isSelected ? 'scale-125 ring-2 ring-blue-400' : 'hover:scale-110'
 						}" style="background-color: ${color}">
               <div class="w-full h-full rounded-full bg-white bg-opacity-20"></div>
@@ -203,10 +204,10 @@
 </script>
 
 <div
-	class="relative w-full overflow-hidden rounded-lg shadow-lg"
-	style="height: {height}; z-index: 1;"
+	class="relative w-full overflow-hidden rounded-lg bg-gray-100 shadow-lg"
+	style="height: {height};"
 >
-	<div bind:this={mapContainer} class="h-full w-full" style="z-index: 1;">
+	<div bind:this={mapContainer} class="h-full w-full">
 		<!-- Loading overlay -->
 		<div class="flex h-full items-center justify-center bg-gray-100">
 			<div class="text-center">
@@ -220,43 +221,59 @@
 <style>
 	:global(.leaflet-container) {
 		font-family: inherit;
-		z-index: 1 !important;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
 	}
 
 	:global(.leaflet-control-container) {
-		z-index: 2 !important;
+		z-index: 2;
 	}
 
 	:global(.leaflet-popup) {
-		z-index: 3 !important;
+		z-index: 3;
+	}
+
+	:global(.leaflet-popup-pane) {
+		z-index: 3;
 	}
 
 	:global(.user-location-marker) {
 		background: transparent !important;
 		border: none !important;
+		box-shadow: none !important;
 	}
 
 	:global(.venue-marker) {
 		background: transparent !important;
 		border: none !important;
+		box-shadow: none !important;
 	}
 
 	:global(.leaflet-popup-content-wrapper) {
 		border-radius: 8px;
+		box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 	}
 
 	:global(.leaflet-popup-content) {
 		margin: 0;
 		padding: 0;
+		line-height: 1.4;
 	}
 
 	:global(.leaflet-popup-close-button) {
 		color: #6b7280 !important;
 		font-size: 18px !important;
 		padding: 4px 8px !important;
+		text-decoration: none !important;
 	}
 
 	:global(.leaflet-popup-close-button:hover) {
 		color: #374151 !important;
+		background: transparent !important;
+	}
+
+	:global(.leaflet-popup-tip) {
+		box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 	}
 </style>
