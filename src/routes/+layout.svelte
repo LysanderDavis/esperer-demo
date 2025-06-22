@@ -2,6 +2,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import Header from '$lib/components/layout/Header.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 
 	// Initialize app on mount
 	onMount(() => {
@@ -13,9 +15,11 @@
 </script>
 
 <!-- Global styles and layout -->
+<Header />
 <main class="min-h-screen">
 	<slot />
 </main>
+<Footer />
 
 <style>
 	:global(html) {
