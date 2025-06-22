@@ -20,9 +20,18 @@
 			title: 'RecycleNearMe',
 			description: 'Find recycling centers around you, and make the recycling process easier, more accessible, and fun for everyone!',
 			image: '/recycle-near-me-banner.png',
-			cta: 'Explore',
+			cta: 'Learn More',
 			link: '/recycle-near-me',
 			category: 'Environmental & Sustainability'
+		},
+		{
+			id: 2,
+			title: 'Veggie',
+			description: 'Find local vegetarian and vegan restaurants, and make plant-based eating quicker, more fun, and easier for all.',
+			image: '/veggie-banner.png',
+			cta: 'Learn More',
+			link: '/veggie',
+			category: 'Wellness & Sustainability'
 		}
 	];
 
