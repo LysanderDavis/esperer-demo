@@ -1,4 +1,4 @@
-<!-- src/routes/+page.svelte -->
+<!-- src/routes/veggie/+page.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -44,7 +44,7 @@
 
 <div class="min-h-screen bg-gray-50">
 	<!-- Header -->
-	<header class="bg-white shadow-sm">
+	<header class="relative z-50 bg-white shadow-sm">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
@@ -67,7 +67,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+	<main class="relative z-10 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 		<!-- Search and Filters -->
 		<VeggieSearch />
 		<VeggieFilter />
@@ -123,37 +123,35 @@
 					{showMap ? 'Hide Map' : 'Show Map'}
 				</button>
 
-				{#if !showMap}
-					<button
-						class="flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors {viewMode ===
-						'grid'
-							? 'bg-blue-100 text-blue-800'
-							: 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
-						on:click={toggleViewMode}
-					>
-						{#if viewMode === 'grid'}
-							<svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6h16M4 10h16M4 14h16M4 18h16"
-								/>
-							</svg>
-							List View
-						{:else}
-							<svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-								/>
-							</svg>
-							Grid View
-						{/if}
-					</button>
-				{/if}
+				<button
+					class="flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors {viewMode ===
+					'grid'
+						? 'bg-blue-100 text-blue-800'
+						: 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
+					on:click={toggleViewMode}
+				>
+					{#if viewMode === 'grid'}
+						<svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 10h16M4 14h16M4 18h16"
+							/>
+						</svg>
+						List View
+					{:else}
+						<svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+							/>
+						</svg>
+						Grid View
+					{/if}
+				</button>
 			</div>
 
 			<div class="text-sm text-gray-600">
@@ -161,17 +159,17 @@
 			</div>
 		</div>
 
-		<!-- Main Content Layout -->
-		<div class="flex gap-6">
+		<!-- Vertical Layout: Map above, Venues below -->
+		<div class="space-y-6">
 			<!-- Map Section -->
 			{#if showMap}
-				<div class="w-1/2">
-					<VeggieMap height="600px" />
+				<div class="relative z-20">
+					<VeggieMap height="500px" />
 				</div>
 			{/if}
 
-			<!-- Venues List/Grid -->
-			<div class="flex-1">
+			<!-- Venues Section -->
+			<div class="relative z-10">
 				{#if $filteredVenues.length === 0 && !$isLoading}
 					<div class="rounded-lg bg-white p-8 text-center shadow">
 						<svg
@@ -203,12 +201,12 @@
 				{:else}
 					<!-- Venues Grid/List -->
 					<div
-						class={viewMode === 'grid' && !showMap
-							? 'grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'
+						class={viewMode === 'grid'
+							? 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
 							: 'space-y-4'}
 					>
 						{#each $filteredVenues as venue (venue.id)}
-							<VeggieCard {venue} compact={showMap || viewMode === 'list'} />
+							<VeggieCard {venue} compact={viewMode === 'list'} />
 						{/each}
 					</div>
 				{/if}
@@ -230,7 +228,7 @@
 				tabindex="-1"
 			>
 				<div
-					class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 shadow-xl"
+					class="relative z-60 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 shadow-xl"
 				>
 					<div class="mb-4 flex items-start justify-between">
 						<div>
@@ -289,7 +287,7 @@
 	</main>
 
 	<!-- Footer -->
-	<footer class="mt-12 border-t bg-white">
+	<footer class="relative z-10 mt-12 border-t bg-white">
 		<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 			<div class="text-center text-gray-600">
 				<p class="mb-2">🌱 Veggie - Discover vegetarian and vegan restaurants in Uzbekistan</p>
