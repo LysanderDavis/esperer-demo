@@ -33,7 +33,27 @@
 		{
 			name: 'Anna Novikova',
 			location: [42.2965, -71.2924], // Wellesley, Massachusetts
-			description: 'Volunteer (Wellesley, Massachusetts, USA)'
+			description: 'Member (Wellesley, Massachusetts, USA)'
+		},
+		{
+			name: 'Nahom Ayana',
+			location: [10.06499, 34.54587], // Wellesley, Massachusetts
+			description: 'Member (Asosa, Ethiopia)'
+		},
+		{
+			name: 'Tafsir Sikder',
+			location: [23.73020, -71.2924], // Wellesley, Massachusetts
+			description: 'Member (Dhaka, Bangladesh)'
+		},
+		{
+			name: 'Shreya Lal',
+			location: [18.13638, 178.43403], // Wellesley, Massachusetts
+			description: 'Member (Suva, Fiji)'
+		},
+		{
+			name: 'Kiranjot Kour',
+			location: [17.42155, 78.43445], // Wellesley, Massachusetts
+			description: 'Member (Hyderabad, India)'
 		}
 	];
 
