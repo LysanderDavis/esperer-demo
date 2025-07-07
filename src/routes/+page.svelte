@@ -36,8 +36,8 @@ n
 			<span class="font-extrabold text-[#9d5d2c]">2</span>&nbsp;continents reaching&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">{stats.countriesReached}</span>&nbsp; countries
 			and mobilizing&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]">{stats.members}</span>&nbsp; dedicated
-			volunteers who make a&nbsp;
+			<span class="font-extrabold text-[#9d5d2c]">{stats.members}</span>&nbsp; dedicated volunteers
+			who make a&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">difference</span>
 			not only in their local community, but&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">worldwide</span>.
