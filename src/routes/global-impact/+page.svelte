@@ -63,14 +63,14 @@
 		},
 		{
 			name: 'Tafsir Sikder',
-			location: [23.73114, 90.41020], // Fixed coordinates for Dhaka
+			location: [23.73114, 90.4102],
 			description: 'Member',
 			city: 'Dhaka',
 			country: 'Bangladesh'
 		},
 		{
 			name: 'Shreya Lal',
-			location: [-18.13638, 178.43403], // Fixed coordinates for Suva
+			location: [-18.13638, 178.43403],
 			description: 'Member',
 			city: 'Suva',
 			country: 'Fiji'
@@ -83,6 +83,11 @@
 			country: 'India'
 		}
 	];
+
+	// Generate dynamic content for SEO
+	const memberCount = members.length;
+	const countries = [...new Set(members.map((m) => m.country))];
+	const countriesText = countries.join(', ');
 
 	const createMarkerIcon = () => {
 		return L.divIcon({
@@ -183,30 +188,123 @@
 </script>
 
 <svelte:head>
-	<title>Global Impact | Mapping a Sustainable Future</title>
+	<!-- Enhanced SEO Meta Tags -->
+	<title
+		>Espérer Global Members Map | {memberCount} Members Across {countries.length} Countries</title
+	>
 	<meta
 		name="description"
-		content="The Map of Global Impact: Discover the members of Espérer and their contributions to a sustainable future."
+		content="Interactive map showcasing Espérer's global community of {memberCount} members across {countries.length} countries including {countriesText}. Discover our volunteers, founders, and members working towards a sustainable future."
 	/>
+	<meta
+		name="keywords"
+		content="Espérer, global members, sustainability, volunteers, world map, {countriesText.toLowerCase()}, environmental impact, global community"
+	/>
+	<meta name="author" content="Espérer" />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href="https://esperer.org/members-map" />
+
+	<!-- Open Graph Meta Tags -->
+	<meta
+		property="og:title"
+		content="Espérer Global Members Map | {memberCount} Members Worldwide"
+	/>
+	<meta
+		property="og:description"
+		content="Explore our interactive map featuring {memberCount} Espérer members across {countries.length} countries. See how our global community is working together for sustainability and environmental impact."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://esperer.org/members-map" />
+	<meta property="og:image" content="https://esperer.org/images/members-map-preview.jpg" />
+	<meta
+		property="og:image:alt"
+		content="Espérer Global Members Map showing locations of {memberCount} members worldwide"
+	/>
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:site_name" content="Espérer" />
+	<meta property="og:locale" content="en_US" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta
+		name="twitter:title"
+		content="Espérer Global Members Map | {memberCount} Members Worldwide"
+	/>
+	<meta
+		name="twitter:description"
+		content="Interactive map showcasing our global community of {memberCount} members across {countries.length} countries working for sustainability."
+	/>
+	<meta name="twitter:image" content="https://esperer.org/images/members-map-preview.jpg" />
+	<meta name="twitter:image:alt" content="Espérer Global Members Map" />
+	<meta name="twitter:site" content="@esperer_org" />
+	<meta name="twitter:creator" content="@esperer_org" />
+
+	<!-- Additional SEO Meta Tags -->
+	<meta name="geo.region" content="Global" />
+	<meta name="geo.placename" content="Worldwide" />
+	<meta name="theme-color" content="#9d5d2c" />
+	<meta name="msapplication-TileColor" content="#9d5d2c" />
+
+	<!-- Structured Data (JSON-LD) -->
+	<script type="application/ld+json">
+		{JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Espérer",
+			"url": "https://esperer.org",
+			"logo": "https://esperer.org/images/logo.png",
+			"description": "Global organization working towards sustainability and environmental impact",
+			"sameAs": [
+				"https://twitter.com/esperer_org",
+				"https://linkedin.com/company/esperer",
+				"https://facebook.com/esperer.org"
+			],
+			"member": members.map(member => ({
+				"@type": "Person",
+				"name": member.name,
+				"jobTitle": member.description,
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": member.city,
+					"addressCountry": member.country
+				}
+			})),
+			"numberOfEmployees": memberCount,
+			"foundingLocation": {
+				"@type": "Place",
+				"name": "Andijan, Uzbekistan"
+			}
+		})}
+	</script>
 </svelte:head>
 
 <!-- Main Layout -->
 <div class="flex min-h-screen flex-col bg-[#f5e9dc] pt-40 pb-4">
 	<!-- Content (title + map) -->
 	<div class="container mx-auto px-4">
-		<!-- Title -->
-		<div class="mb-4">
+		<!-- Enhanced Title Section -->
+		<div class="mb-4 text-center">
 			<Typography
 				variant="h1"
-				className="text-[#9d5d2c] text-center text-5xl md:text-4xl font-bold"
+				className="text-[#9d5d2c] text-center text-5xl md:text-4xl font-bold mb-2"
 			>
 				Members Map
 			</Typography>
+			<p class="mb-4 text-lg text-[#9d5d2c]/80">
+				Discover our {memberCount} members across {countries.length} countries working for a sustainable
+				future
+			</p>
 		</div>
 
 		<!-- Map -->
 		<div class="flex-1 overflow-hidden rounded-xl shadow-lg">
-			<div bind:this={mapContainer} class="z-10 h-[80vh] w-full rounded-xl shadow-md"></div>
+			<div
+				bind:this={mapContainer}
+				class="z-10 h-[80vh] w-full rounded-xl shadow-md"
+				role="img"
+				aria-label="Interactive map showing Espérer member locations worldwide"
+			></div>
 		</div>
 	</div>
 
