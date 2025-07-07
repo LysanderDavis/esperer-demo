@@ -33,7 +33,7 @@ n
 		>
 			<span lang="fr" class="font-extrabold text-[#9d5d2c]"> Espérer </span>
 			spans across&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]">2</span>&nbsp;continents reaching&nbsp;
+			<span class="font-extrabold text-[#9d5d2c]">2</span>continents reaching&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">{stats.countriesReached}</span>&nbsp; countries
 			and mobilizing&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">{stats.members}</span>&nbsp; dedicated volunteers
