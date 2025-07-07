@@ -63,7 +63,7 @@
 		},
 		{
 			name: 'Tafsir Sikder',
-			location: [23.7302, 90.3911], // Fixed coordinates for Dhaka
+			location: [23.73114, 90.41020], // Fixed coordinates for Dhaka
 			description: 'Member',
 			city: 'Dhaka',
 			country: 'Bangladesh'
