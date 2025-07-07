@@ -5,25 +5,86 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#16a34a" />
+		<meta name="theme-color" content="#9d5d2c" />
 
-		<!-- SEO Meta Tags -->
+		<!-- Enhanced SEO Meta Tags for Espérer -->
+		<meta name="author" content="Espérer" />
+		<meta name="robots" content="index, follow" />
 		<meta
 			name="description"
-			content="Find vegetarian and vegan restaurants in Uzbekistan. Discover plant-based dining options near you."
+			content="Espérer - A global community working towards sustainability and environmental impact. Built on six pillars: Hope, Perseverance, Community, Integrity, Innovation, and Competence."
 		/>
 		<meta
 			name="keywords"
-			content="vegetarian, vegan, restaurants, Uzbekistan, Tashkent, plant-based, halal vegetarian"
+			content="Espérer, sustainability, environmental impact, climate change, hope, perseverance, community, integrity, innovation, competence, global members, sustainable future"
 		/>
 
-		<!-- Open Graph -->
-		<meta property="og:title" content="Veggie - Vegetarian Restaurants in Uzbekistan" />
+		<!-- Open Graph Meta Tags -->
+		<meta property="og:title" content="Espérer | Mapping a Sustainable Future" />
 		<meta
 			property="og:description"
-			content="Discover vegetarian and vegan restaurants across Uzbekistan"
+			content="Join our global community working towards sustainability. Founded on six pillars: Hope, Perseverance, Community, Integrity, Innovation, and Competence."
 		/>
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://esperer.org" />
+		<meta property="og:image" content="https://esperer.org/images/esperer-og-image.jpg" />
+		<meta property="og:image:alt" content="Espérer - Global community for sustainability" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Espérer" />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Espérer | Mapping a Sustainable Future" />
+		<meta
+			name="twitter:description"
+			content="Global community working towards sustainability through Hope, Perseverance, Community, Integrity, Innovation, and Competence."
+		/>
+		<meta name="twitter:image" content="https://esperer.org/images/esperer-og-image.jpg" />
+		<meta name="twitter:image:alt" content="Espérer - Global sustainability community" />
+		<meta name="twitter:site" content="@esperer_org" />
+		<meta name="twitter:creator" content="@esperer_org" />
+
+		<!-- Additional SEO Meta Tags -->
+		<meta name="application-name" content="Espérer" />
+		<meta name="apple-mobile-web-app-title" content="Espérer" />
+		<meta name="msapplication-TileColor" content="#9d5d2c" />
+		<meta name="msapplication-config" content="/browserconfig.xml" />
+
+		<!-- Geo and Language Tags -->
+		<meta name="geo.region" content="Global" />
+		<meta name="geo.placename" content="Worldwide" />
+		<link rel="alternate" hreflang="en" href="https://esperer.org" />
+		<link rel="alternate" hreflang="fr" href="https://esperer.org/fr" />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href="https://esperer.org" />
+
+		<!-- Structured Data (JSON-LD) -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Espérer",
+				"url": "https://esperer.org",
+				"logo": "https://esperer.org/images/logo.png",
+				"description": "Global community working towards sustainability and environmental impact, founded on six pillars: Hope, Perseverance, Community, Integrity, Innovation, and Competence.",
+				"foundingDate": "2023",
+				"foundingLocation": {
+					"@type": "Place",
+					"name": "Andijan, Uzbekistan"
+				},
+				"sameAs": [
+					"https://twitter.com/esperer_org",
+					"https://linkedin.com/company/esperer",
+					"https://facebook.com/esperer.org",
+					"https://instagram.com/esperer_org"
+				],
+				"keywords": "sustainability, environmental impact, climate change, global community",
+				"slogan": "Mapping a Sustainable Future"
+			}
+		</script>
 
 		<!-- Leaflet CSS -->
 		<link
@@ -33,13 +94,25 @@
 			crossorigin=""
 		/>
 
-		<!-- Tailwind CSS -->
+		<!-- Tailwind CSS with Espérer Color Scheme -->
 		<script src="https://cdn.tailwindcss.com"></script>
 		<script>
 			tailwind.config = {
 				theme: {
 					extend: {
 						colors: {
+							esperer: {
+								50: '#fef7f0',
+								100: '#feecdc',
+								200: '#fcd9bd',
+								300: '#f9be8d',
+								400: '#f59e5b',
+								500: '#f2803a',
+								600: '#e3692a',
+								700: '#bd5324',
+								800: '#9d5d2c',
+								900: '#7f4a25'
+							},
 							green: {
 								50: '#f0fdf4',
 								100: '#dcfce7',
