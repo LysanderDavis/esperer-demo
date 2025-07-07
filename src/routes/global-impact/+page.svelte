@@ -252,8 +252,8 @@
 			"@context": "https://schema.org",
 			"@type": "Organization",
 			"name": "Espérer",
-			"url": "https://esperer.org",
-			"logo": "https://esperer.org/images/logo.png",
+			"url": "https://esperer.netlify.app",
+			"logo": "https://esperer.netlify.app/logo.png",
 			"description": "Global organization working towards sustainability and environmental impact",
 			"sameAs": [
 				"https://twitter.com/esperer_org",
