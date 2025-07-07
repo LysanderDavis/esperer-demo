@@ -8,8 +8,8 @@
 	// Here, define your stats once to make it easy to update
 	const stats = {
 		peopleReached: 20,
-		volunteers: 5,
-		countriesReached: 2
+		members: 9,
+		countriesReached: 6
 	};
 </script>
 
@@ -21,7 +21,7 @@ n
 
 		<div class="mt-10 grid grid-cols-1 gap-8 px-6 sm:grid-cols-3">
 			<StatsCounter label="People Reached" count={stats.peopleReached} />
-			<StatsCounter label="Volunteers" count={stats.volunteers} />
+			<StatsCounter label="Volunteers" count={stats.members} />
 			<StatsCounter label="Countries Reached" count={stats.countriesReached} />
 		</div>
 
@@ -36,7 +36,7 @@ n
 			<span class="font-extrabold text-[#9d5d2c]">2</span>&nbsp;continents reaching&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">{stats.countriesReached}</span>&nbsp; countries
 			and mobilizing&nbsp;
-			<span class="font-extrabold text-[#9d5d2c]">{stats.volunteers}</span>&nbsp; dedicated
+			<span class="font-extrabold text-[#9d5d2c]">{stats.members}</span>&nbsp; dedicated
 			volunteers who make a&nbsp;
 			<span class="font-extrabold text-[#9d5d2c]">difference</span>
 			not only in their local community, but&nbsp;
